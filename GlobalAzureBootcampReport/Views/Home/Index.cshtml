@@ -8,8 +8,22 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    Bare minimum
+    <div id="app"></div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/react-with-addons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/JSXTransformer.js"></script>
+    <script type="text/jsx;harmony=true">
+        class ExampleApplication extends React.Component {
+            render() {
+                var message = `React has been successfully running for ${this.props.elapsed} seconds.`;
+
+                return <p>
+                        {message}
+                    </p>;
+            }
+        }        
+        React.render(React.createElement(ExampleApplication, { elapsed: 100 }), document.getElementById('app'));
+    </script>
 </body>
 </html>
