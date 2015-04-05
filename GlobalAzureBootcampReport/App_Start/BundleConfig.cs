@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Optimization;
+using System.Web.Optimization.React;
 
 namespace GlobalAzureBootcampReport
 {
@@ -23,6 +24,11 @@ namespace GlobalAzureBootcampReport
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new JsxBundle("~/bundles/main").Include(
+                // Add your JSX files here
+                "~/Components/app.jsx"
+            ));
         }
     }
 }

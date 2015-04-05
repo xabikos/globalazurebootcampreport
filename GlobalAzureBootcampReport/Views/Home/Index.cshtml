@@ -8,11 +8,12 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div id="app"></div>
+    @Html.React("App", new { elapsed = 100 })
+    
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/react-with-addons.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/JSXTransformer.js"></script>
-    <script type="text/jsx;harmony=true" src="~/Components/app.jsx"></script>
+    @Scripts.Render("~/bundles/main")
+    @Html.ReactInitJavaScript()
 </body>
 </html>
