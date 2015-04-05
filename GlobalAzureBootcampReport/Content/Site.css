@@ -1,1 +1,7 @@
-﻿
+﻿body {
+    /*background-color: #006cc2;*/
+}
+
+a.navbar-brand img {
+    max-width: 100px;
+}

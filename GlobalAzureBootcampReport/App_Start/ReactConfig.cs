@@ -21,7 +21,8 @@ namespace GlobalAzureBootcampReport
 			// your components as well as all of their dependencies.
 			// See http://reactjs.net/ for more information. Example:
 			ReactSiteConfiguration.Configuration
-				.AddScript("~/Components/app.jsx");
+				.AddScript("~/Components/app.jsx")
+				.AddScript("~/Components/navigationBar.jsx");
 		}
 
 	}

@@ -7,13 +7,14 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    @Html.React("App", new { elapsed = 100 })
+    <body>
+        
+        @Html.React("App", new {}, containerId:"app" )
     
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/react-with-addons.min.js"></script>
-    @Scripts.Render("~/bundles/main")
-    @Html.ReactInitJavaScript()
-</body>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/react-with-addons.min.js"></script>
+        @Scripts.Render("~/bundles/main")
+        @Html.ReactInitJavaScript()
+    </body>
 </html>

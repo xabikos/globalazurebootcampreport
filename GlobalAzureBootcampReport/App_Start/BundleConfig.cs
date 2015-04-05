@@ -25,9 +25,8 @@ namespace GlobalAzureBootcampReport
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
-            bundles.Add(new JsxBundle("~/bundles/main").Include(
-                // Add your JSX files here
-                "~/Components/app.jsx"
+            bundles.Add(new JsxBundle("~/bundles/main").IncludeDirectory(
+                "~/Components", "*.jsx", false
             ));
         }
     }
