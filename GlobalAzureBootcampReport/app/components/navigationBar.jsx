@@ -1,4 +1,6 @@
-﻿var NavigationBar = React.createClass({
+﻿var React = require('react');
+
+var NavigationBar = React.createClass({
   render() {
 	return ( 
 		<nav className="navbar navbar-fixed-top">
@@ -32,3 +34,5 @@
 	);
   }
 });
+
+module.exports = NavigationBar;
