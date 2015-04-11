@@ -9,7 +9,7 @@ var NavigationBar = React.createClass({
 		</a>	
 	);
 	return ( 
-		<ReactBootstrap.Navbar fixedTop='true' brand={navBarHeader}>
+		<ReactBootstrap.Navbar fixedTop={true} brand={navBarHeader}>
 			<ReactBootstrap.Nav navbar right>
 				<ReactBootstrap.NavItem href='https://github.com/xabikos/globalazurebootcampreport' target='_blank'>Created by xabikos</ReactBootstrap.NavItem>
 				<ReactBootstrap.NavItem href='http://azure.microsoft.com/en-us/' target='_blank'>Hosted by Microsoft Azure</ReactBootstrap.NavItem>

@@ -78,7 +78,7 @@
 			)	
 		);
 		return ( 
-			React.createElement(ReactBootstrap.Navbar, {fixedTop: "true", brand: navBarHeader}, 
+			React.createElement(ReactBootstrap.Navbar, {fixedTop: true, brand: navBarHeader}, 
 				React.createElement(ReactBootstrap.Nav, {navbar: true, right: true}, 
 					React.createElement(ReactBootstrap.NavItem, {href: "https://github.com/xabikos/globalazurebootcampreport", target: "_blank"}, "Created by xabikos"), 
 					React.createElement(ReactBootstrap.NavItem, {href: "http://azure.microsoft.com/en-us/", target: "_blank"}, "Hosted by Microsoft Azure"), 

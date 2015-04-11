@@ -251,8 +251,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\components\index.js" />
+    <Content Include="app\client.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="app\server.js" />
+    <Content Include="build\client.bundle.js" />
     <Content Include="build\server.bundle.js" />
     <Content Include="webpack.config.js" />
     <None Include="ClearScript.V8\ClearScriptV8-32.dll">
