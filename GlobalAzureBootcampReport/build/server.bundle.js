@@ -68,36 +68,21 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(5);
+	var ReactBootstrap = __webpack_require__(6);
 
 	var NavigationBar = React.createClass({displayName: "NavigationBar",
 	  render:function() {
+		var navBarHeader = (
+			React.createElement("a", {href: "/"}, 
+				React.createElement("img", {src: "/Content/images/2015-logo-inverted-small.png", alt: "Global Azure Bootcamp 2015"})					
+			)	
+		);
 		return ( 
-			React.createElement("nav", {className: "navbar navbar-fixed-top"}, 
-				 React.createElement("div", {class: "navbar-header"}, 
-					React.createElement("a", {href: "/", className: "navbar-brand"}, 
-						React.createElement("img", {src: "/Content/images/2015-logo-inverted-small.png", alt: "Global Azure Bootcamp 2015"})					
-					)				
-				), 
-				React.createElement("div", {className: "navbar-collapse collapse"}, 
-					React.createElement("div", {className: "pull-right navbar-logo"}, 
-						React.createElement("ul", {className: "nav navbar-nav pull-right"}, 
-							React.createElement("li", null, 
-								React.createElement("a", {href: "https://github.com/xabikos/globalazurebootcampreport", target: "_blank"}, 
-									"Created by xabikos"
-								)
-							), 
-							React.createElement("li", null, 
-								React.createElement("a", {href: "http://azure.microsoft.com/en-us/", target: "_blank"}, 
-									 "Hosted by Microsoft Azure"
-								)
-							), 
-							React.createElement("li", {class: "dropdown dropdown-big"}, 
-								React.createElement("a", {href: "https://facebook.github.io/react/", target: "_blank"}, 
-									"Powered by Reactjs"
-								)
-							)
-						)
-					)
+			React.createElement(ReactBootstrap.Navbar, {fixedTop: "true", brand: navBarHeader}, 
+				React.createElement(ReactBootstrap.Nav, {navbar: true, right: true}, 
+					React.createElement(ReactBootstrap.NavItem, {href: "https://github.com/xabikos/globalazurebootcampreport", target: "_blank"}, "Created by xabikos"), 
+					React.createElement(ReactBootstrap.NavItem, {href: "http://azure.microsoft.com/en-us/", target: "_blank"}, "Hosted by Microsoft Azure"), 
+					React.createElement(ReactBootstrap.NavItem, {href: "https://facebook.github.io/react/", target: "_blank"}, "Powered by Reactjs")
 				)
 			)
 		);
@@ -130,6 +115,12 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = React;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = ReactBootstrap;
 
 /***/ }
 /******/ ]);

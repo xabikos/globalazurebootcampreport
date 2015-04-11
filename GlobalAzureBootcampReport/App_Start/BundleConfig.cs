@@ -20,7 +20,7 @@ namespace GlobalAzureBootcampReport
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
-                      "~/Scripts/react-bootstrap.js"));
+                      "~/Scripts/react-bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

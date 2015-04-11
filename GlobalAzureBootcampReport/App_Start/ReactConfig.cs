@@ -21,6 +21,7 @@ namespace GlobalAzureBootcampReport
 			// your components as well as all of their dependencies.
 			// See http://reactjs.net/ for more information. Example:
 			ReactSiteConfiguration.Configuration
+				.AddScript("~/Scripts/react-bootstrap.min.js")
 				.AddScript("~/build/server.bundle.js");
 		}
 
