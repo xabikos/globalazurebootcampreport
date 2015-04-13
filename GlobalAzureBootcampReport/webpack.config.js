@@ -7,7 +7,7 @@ module.exports = {
         client: './client'
     },
     output: {
-        path: path.join(__dirname, 'build'),
+        path: path.join(__dirname, 'appbundles'),
         filename: '[name].bundle.js'
     },
     module: {

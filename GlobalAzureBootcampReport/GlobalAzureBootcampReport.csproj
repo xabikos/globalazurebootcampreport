@@ -254,9 +254,12 @@
     <Content Include="app\client.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="app\server.js" />
-    <Content Include="build\client.bundle.js" />
-    <Content Include="build\server.bundle.js" />
+    <Content Include="appbundles\client.bundle.js" />
+    <Content Include="appbundles\server.bundle.js" />
+    <Content Include="gulpfile.js" />
     <Content Include="webpack.config.js" />
+    <Content Include="appbundles\client.bundle.js.map" />
+    <Content Include="appbundles\server.bundle.js.map" />
     <None Include="ClearScript.V8\ClearScriptV8-32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
