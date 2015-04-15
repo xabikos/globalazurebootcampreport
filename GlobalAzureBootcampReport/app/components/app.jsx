@@ -1,7 +1,7 @@
 ﻿var NavigationBar = require('./NavigationBar');
 var React = require('react');
 
-var App = React.createClass({
+class App extends React.Component {
   render() {
 	return (
 		<div>
@@ -9,6 +9,6 @@ var App = React.createClass({
 		</div>
 	);
   }
-});
+}
 
 module.exports = App;
