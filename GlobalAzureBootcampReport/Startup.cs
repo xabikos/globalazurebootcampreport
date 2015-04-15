@@ -12,6 +12,7 @@ namespace GlobalAzureBootcampReport
     {
         public void Configuration(IAppBuilder app)
         {
+            ConfigureIoC(app);
             ConfigureAuth(app);
         }
     }
