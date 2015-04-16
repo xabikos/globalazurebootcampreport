@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using GlobalAzureBootcampReport.Azure;
 using GlobalAzureBootcampReport.Twitter;
 
 namespace GlobalAzureBootcampReport.Controllers
@@ -7,15 +8,18 @@ namespace GlobalAzureBootcampReport.Controllers
     public class HomeController : Controller
     {
         private readonly ITwitterManager _twitterManager;
+        private readonly ITweetsRepository _tweetsRepository;
 
-        public HomeController(ITwitterManager twitterManager)
+        public HomeController(ITwitterManager twitterManager, ITweetsRepository tweetsRepository)
         {
             _twitterManager = twitterManager;
+            _tweetsRepository = tweetsRepository;
         }
 
         public ActionResult Index()
         {
-            return View();
+            var stats = _tweetsRepository.GetTopUserStats(10);
+            return View(stats);
         }
 
         public ActionResult StartListening()

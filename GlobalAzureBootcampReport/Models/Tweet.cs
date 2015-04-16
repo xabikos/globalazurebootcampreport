@@ -5,11 +5,16 @@ namespace GlobalAzureBootcampReport.Models
 {
     public class Tweet : TableEntity
     {
-        public Tweet(string user, string id)
+        public Tweet() {}
+
+        public Tweet(string partitionKey, string rowKey)
         {
-            PartitionKey = user;
-            RowKey = id;
+            PartitionKey = partitionKey;
+            RowKey = rowKey;
         }
+
+        public string UserId { get { return PartitionKey; } }
+        public string TweetId { get { return RowKey; } }
 
         public string User { get; set; }
 

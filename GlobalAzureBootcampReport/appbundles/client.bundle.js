@@ -42,33 +42,45 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+/*!*******************!*\
+  !*** ./client.js ***!
+  \*******************/
 /***/ function(module, exports, __webpack_require__) {
 
 	// All JavaScript in here will be loaded client-side
-	var Components = __webpack_require__(1);
+	var Components = __webpack_require__(/*! expose?Components!./components */ 1);
 
 /***/ },
 /* 1 */
+/*!***********************************************************!*\
+  !*** ../~/expose-loader?Components!./components/index.js ***!
+  \***********************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["Components"] = __webpack_require__(2);
+	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["Components"] = __webpack_require__(/*! -!./components/index.js */ 2);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
 /* 2 */
+/*!*****************************!*\
+  !*** ./components/index.js ***!
+  \*****************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	    NavigationBar: __webpack_require__(3),
-	    App: __webpack_require__(4)
+	    NavigationBar: __webpack_require__(/*! ./NavigationBar */ 3),
+	    App: __webpack_require__(/*! ./App */ 4)
 	};
 
 /***/ },
 /* 3 */
+/*!**************************************!*\
+  !*** ./components/NavigationBar.jsx ***!
+  \**************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(5);
-	var ReactBootstrap = __webpack_require__(6);
+	var React = __webpack_require__(/*! react */ 5);
+	var ReactBootstrap = __webpack_require__(/*! reactBootstrap */ 6);
 	
 	var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____Class0.hasOwnProperty(____Class0____Key)){NavigationBar[____Class0____Key]=____Class0[____Class0____Key];}}var ____SuperProtoOf____Class0=____Class0===null?null:____Class0.prototype;NavigationBar.prototype=Object.create(____SuperProtoOf____Class0);NavigationBar.prototype.constructor=NavigationBar;NavigationBar.__superConstructor__=____Class0;function NavigationBar(){"use strict";if(____Class0!==null){____Class0.apply(this,arguments);}}
 		Object.defineProperty(NavigationBar.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
@@ -93,16 +105,23 @@
 
 /***/ },
 /* 4 */
+/*!****************************!*\
+  !*** ./components/App.jsx ***!
+  \****************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var NavigationBar = __webpack_require__(3);
-	var React = __webpack_require__(5);
+	var React = __webpack_require__(/*! react */ 5);
+	
+	var NavigationBar = __webpack_require__(/*! ./NavigationBar */ 3);
+	var UsersStats = __webpack_require__(/*! ./UsersStats */ 7);
 	
 	var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____Class1.hasOwnProperty(____Class1____Key)){App[____Class1____Key]=____Class1[____Class1____Key];}}var ____SuperProtoOf____Class1=____Class1===null?null:____Class1.prototype;App.prototype=Object.create(____SuperProtoOf____Class1);App.prototype.constructor=App;App.__superConstructor__=____Class1;function App(){"use strict";if(____Class1!==null){____Class1.apply(this,arguments);}}
 	  Object.defineProperty(App.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		return (
 			React.createElement("div", null, 
-				React.createElement(NavigationBar, null)
+				React.createElement(NavigationBar, null), 
+				React.createElement(UsersStats, {usersStats: this.props.initialStats})
+				
 			)
 		);
 	  }});
@@ -112,15 +131,51 @@
 
 /***/ },
 /* 5 */
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = React;
 
 /***/ },
 /* 6 */
+/*!*********************************!*\
+  !*** external "ReactBootstrap" ***!
+  \*********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = ReactBootstrap;
+
+/***/ },
+/* 7 */
+/*!***********************************!*\
+  !*** ./components/UsersStats.jsx ***!
+  \***********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 5);
+	
+	var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____Class2.hasOwnProperty(____Class2____Key)){UsersStats[____Class2____Key]=____Class2[____Class2____Key];}}var ____SuperProtoOf____Class2=____Class2===null?null:____Class2.prototype;UsersStats.prototype=Object.create(____SuperProtoOf____Class2);UsersStats.prototype.constructor=UsersStats;UsersStats.__superConstructor__=____Class2;function UsersStats(){"use strict";if(____Class2!==null){____Class2.apply(this,arguments);}}
+	  Object.defineProperty(UsersStats.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
+		var usersStats = this.props.usersStats.map(function(userStat) 
+			{return React.createElement("li", null, 
+				"Name: ", userStat.Name, 
+				"Count: ", userStat.TweetsNumber
+			);}
+		);
+		return (		
+			React.createElement("div", {id: "usersStats"}, 
+				React.createElement("h1", null, "Users Stats"), 
+				React.createElement("ol", null, 
+					usersStats
+				)
+			)
+		);
+	  }});
+	
+	
+	module.exports = UsersStats;
 
 /***/ }
 /******/ ]);

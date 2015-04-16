@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<GlobalAzureBootcampReport.Models.UserStat>
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,7 +10,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @Html.React("Components.App", new { }, containerId: "app")
+    @Html.React("Components.App", new {initialStats =  Model}, containerId: "app")
 
     @Scripts.Render("~/bundles/jquery")
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/react-with-addons.min.js"></script>
