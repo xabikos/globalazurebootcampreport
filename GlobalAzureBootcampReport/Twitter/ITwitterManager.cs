@@ -11,5 +11,7 @@ namespace GlobalAzureBootcampReport.Twitter
         /// Starts listening on Twitter stream.
         /// </summary>
         void StartListening();
+
+        void StopListening();
     }
 }

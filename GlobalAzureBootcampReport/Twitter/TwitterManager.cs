@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using GlobalAzureBootcampReport.Azure;
 using Tweetinvi;
+using Tweetinvi.Core.Interfaces.Streaminvi;
 
 namespace GlobalAzureBootcampReport.Twitter
 {
@@ -10,6 +11,7 @@ namespace GlobalAzureBootcampReport.Twitter
     internal class TwitterManager : ITwitterManager
     {
         private readonly ITweetsRepository _repository;
+        private IFilteredStream _stream;
 
         public TwitterManager(ITweetsRepository repository)
         {
@@ -19,10 +21,10 @@ namespace GlobalAzureBootcampReport.Twitter
         public void StartListening()
         {
 
-            var stream = Stream.CreateFilteredStream();
-            stream.AddTrack("#GlobalAzure");
+            _stream = Stream.CreateFilteredStream();
+            _stream.AddTrack("#vouli");
 
-            stream.MatchingTweetReceived += (sender, args) =>
+            _stream.MatchingTweetReceived += (sender, args) =>
             {
                 _repository.SaveTweet(new Models.Tweet(args.Tweet.Creator.IdStr, args.Tweet.Id.ToString())
                 {
@@ -31,8 +33,17 @@ namespace GlobalAzureBootcampReport.Twitter
                     Country = args.Tweet.Place != null ? args.Tweet.Place.Country : string.Empty
                 });
             };
-            Task.Factory.StartNew(stream.StartStreamMatchingAllConditions);
-
+            Task.Factory.StartNew(_stream.StartStreamMatchingAllConditions);
+            
         }
+
+        public void StopListening()
+        {
+            if (_stream != null)
+            {
+                _stream.StopStream();
+            }
+        }
+
     }
 }

@@ -24,5 +24,11 @@ namespace GlobalAzureBootcampReport.Controllers
             return new EmptyResult();
         }
 
+        public ActionResult StopListening()
+        {
+            _twitterManager.StopListening();
+            return new EmptyResult();
+        }
+
     }
 }
