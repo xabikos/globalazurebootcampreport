@@ -343,6 +343,7 @@
     <Compile Include="Twitter\TwitterManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\UsersStats.js" />
     <Content Include="Scripts\build\client.bundle.js" />
     <Content Include="Scripts\build\index.js" />
     <Content Include="Scripts\build\client.js" />

@@ -1,4 +1,4 @@
-{
+ {
   "name": "GlobalAzureBootcampReport",
   "version": "1.0.0",
   "description": "The presentation application for Global Azure Bootcamp 2015",
@@ -16,7 +16,7 @@
   ],
   "author": "Charalampos Karypidis",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "expose-loader": "^0.6.0",
     "gulp": "^3.8.11",
     "gulp-webpack-build": "^0.6.1",
