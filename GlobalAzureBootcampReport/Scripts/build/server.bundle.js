@@ -159,7 +159,7 @@
 	var React = __webpack_require__(/*! react */ 6);
 	var ReactBootstrap = __webpack_require__(/*! reactBootstrap */ 7);
 	
-	var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____Class1.hasOwnProperty(____Class1____Key)){NavigationBar[____Class1____Key]=____Class1[____Class1____Key];}}var ____SuperProtoOf____Class1=____Class1===null?null:____Class1.prototype;NavigationBar.prototype=Object.create(____SuperProtoOf____Class1);NavigationBar.prototype.constructor=NavigationBar;NavigationBar.__superConstructor__=____Class1;function NavigationBar(){"use strict";if(____Class1!==null){____Class1.apply(this,arguments);}}
+	var ____ClassI=React.Component;for(var ____ClassI____Key in ____ClassI){if(____ClassI.hasOwnProperty(____ClassI____Key)){NavigationBar[____ClassI____Key]=____ClassI[____ClassI____Key];}}var ____SuperProtoOf____ClassI=____ClassI===null?null:____ClassI.prototype;NavigationBar.prototype=Object.create(____SuperProtoOf____ClassI);NavigationBar.prototype.constructor=NavigationBar;NavigationBar.__superConstructor__=____ClassI;function NavigationBar(){"use strict";if(____ClassI!==null){____ClassI.apply(this,arguments);}}
 		Object.defineProperty(NavigationBar.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 			var navBarHeader = (
 				React.createElement("a", {href: "/"}, 
@@ -239,10 +239,46 @@
 	
 	var RegistrationForm = React.createClass({displayName: "RegistrationForm",
 		
+		getInitialState:function(){
+			return {
+				firstName: '',
+				lastName: '',
+				email: '',
+				password: ''
+			};
+		},
+	
+		handleChange:function(e){
+			switch (e.target.id) {
+				case 'registrationFirstName':
+					this.setState({firstName: e.target.value});
+	                break;
+				case 'registrationLastName':
+					this.setState({lastName: e.target.value});
+	                break;
+				case 'registrationEmail':
+					this.setState({email: e.target.value});
+	                break;
+				case 'registrationPassword':
+					this.setState({password: e.target.value});
+	                break;
+			}
+		},
+	
+		submit:function(){
+			console.log('Registration form submit');
+		},
+	
 		render:function() {
 			return(
 				React.createElement(ReactBootstrap.Panel, {header: "Registration", bsStyle: "primary"}, 
-					"Panel content"
+					React.createElement("form", {className: "form-horizontal"}, 
+						React.createElement(ReactBootstrap.Input, {type: "text", id: "registrationFirstName", value: this.state.firstName, onChange: this.handleChange, label: "First Name", labelClassName: "col-xs-2", wrapperClassName: "col-xs-10"}), 
+						React.createElement(ReactBootstrap.Input, {type: "text", id: "registrationLastName", value: this.state.lastName, onChange: this.handleChange, label: "Last Name", labelClassName: "col-xs-2", wrapperClassName: "col-xs-10"}), 
+						React.createElement(ReactBootstrap.Input, {type: "email", id: "registrationEmail", value: this.state.email, onChange: this.handleChange, label: "Email", labelClassName: "col-xs-2", wrapperClassName: "col-xs-10"}), 
+						React.createElement(ReactBootstrap.Input, {type: "password", id: "registrationPassword", value: this.state.password, onChange: this.handleChange, label: "Password", labelClassName: "col-xs-2", wrapperClassName: "col-xs-10"}), 
+						React.createElement(ReactBootstrap.Button, {onClick: this.submit, bsStyle: "primary"}, "Submit")
+					)
 				)
 			);
 		}
