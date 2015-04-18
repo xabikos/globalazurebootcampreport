@@ -1,4 +1,5 @@
 ﻿var React = require('react');
+var ReactBootstrap = require('reactBootstrap');
 
 var usersStatsStore = require('../UsersStats');
 
@@ -20,12 +21,12 @@ var UsersStats = React.createClass({
 			</li>
 		);
 		return (		
-			<div id="usersStats">
+			<ReactBootstrap.Panel header='Users Statistcis' bsStyle='info'>
 				<h1>Users Stats</h1>
 				<ol>
 					{usersStats}
 				</ol>
-			</div>
+			</ReactBootstrap.Panel>
 		);
 	},
 

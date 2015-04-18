@@ -363,6 +363,7 @@
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="webpack.config.js" />
     <Content Include="app\components\usersStats.jsx" />
+    <Content Include="app\components\registrationForm.jsx" />
     <None Include="ClearScript.V8\ClearScriptV8-32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

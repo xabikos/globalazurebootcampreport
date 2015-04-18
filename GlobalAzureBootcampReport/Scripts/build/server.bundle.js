@@ -105,16 +105,22 @@
 	
 	var NavigationBar = __webpack_require__(/*! ./NavigationBar */ 8);
 	var UsersStats = __webpack_require__(/*! ./UsersStats */ 9);
+	var RegistrationForm = __webpack_require__(/*! ./RegistrationForm */ 10);
 	
-	var ____Class8=React.Component;for(var ____Class8____Key in ____Class8){if(____Class8.hasOwnProperty(____Class8____Key)){App[____Class8____Key]=____Class8[____Class8____Key];}}var ____SuperProtoOf____Class8=____Class8===null?null:____Class8.prototype;App.prototype=Object.create(____SuperProtoOf____Class8);App.prototype.constructor=App;App.__superConstructor__=____Class8;function App(){"use strict";if(____Class8!==null){____Class8.apply(this,arguments);}}
+	var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____Class0.hasOwnProperty(____Class0____Key)){App[____Class0____Key]=____Class0[____Class0____Key];}}var ____SuperProtoOf____Class0=____Class0===null?null:____Class0.prototype;App.prototype=Object.create(____SuperProtoOf____Class0);App.prototype.constructor=App;App.__superConstructor__=____Class0;function App(){"use strict";if(____Class0!==null){____Class0.apply(this,arguments);}}
 	  Object.defineProperty(App.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		return (
 			React.createElement("div", null, 
 				React.createElement(NavigationBar, null), 
 				React.createElement(ReactBootstrap.Grid, {fluid: false}, 
 					React.createElement(ReactBootstrap.Row, null, 
-						React.createElement(ReactBootstrap.Col, {xs: 6, md: 4}, 
+						React.createElement(ReactBootstrap.Col, {xs: 12, md: 4}, 
 							React.createElement(UsersStats, {usersStats: this.props.initialStats})
+						), 
+						React.createElement(ReactBootstrap.Col, {xs: 12, md: 6}
+						), 
+						React.createElement(ReactBootstrap.Col, {xs: 12, md: 2}, 
+							React.createElement(RegistrationForm, null)
 						)
 					)
 				)
@@ -153,7 +159,7 @@
 	var React = __webpack_require__(/*! react */ 6);
 	var ReactBootstrap = __webpack_require__(/*! reactBootstrap */ 7);
 	
-	var ____Class9=React.Component;for(var ____Class9____Key in ____Class9){if(____Class9.hasOwnProperty(____Class9____Key)){NavigationBar[____Class9____Key]=____Class9[____Class9____Key];}}var ____SuperProtoOf____Class9=____Class9===null?null:____Class9.prototype;NavigationBar.prototype=Object.create(____SuperProtoOf____Class9);NavigationBar.prototype.constructor=NavigationBar;NavigationBar.__superConstructor__=____Class9;function NavigationBar(){"use strict";if(____Class9!==null){____Class9.apply(this,arguments);}}
+	var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____Class1.hasOwnProperty(____Class1____Key)){NavigationBar[____Class1____Key]=____Class1[____Class1____Key];}}var ____SuperProtoOf____Class1=____Class1===null?null:____Class1.prototype;NavigationBar.prototype=Object.create(____SuperProtoOf____Class1);NavigationBar.prototype.constructor=NavigationBar;NavigationBar.__superConstructor__=____Class1;function NavigationBar(){"use strict";if(____Class1!==null){____Class1.apply(this,arguments);}}
 		Object.defineProperty(NavigationBar.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 			var navBarHeader = (
 				React.createElement("a", {href: "/"}, 
@@ -182,6 +188,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(/*! react */ 6);
+	var ReactBootstrap = __webpack_require__(/*! reactBootstrap */ 7);
 	
 	var usersStatsStore = __webpack_require__(/*! ../UsersStats */ 4);
 	
@@ -203,7 +210,7 @@
 				);}
 			);
 			return (		
-				React.createElement("div", {id: "usersStats"}, 
+				React.createElement(ReactBootstrap.Panel, {header: "Users Statistcis", bsStyle: "info"}, 
 					React.createElement("h1", null, "Users Stats"), 
 					React.createElement("ol", null, 
 						usersStats
@@ -219,6 +226,29 @@
 	});
 	
 	module.exports = UsersStats;
+
+/***/ },
+/* 10 */
+/*!**************************************************************************************************************!*\
+  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/components/RegistrationForm.jsx ***!
+  \**************************************************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 6);
+	var ReactBootstrap = __webpack_require__(/*! reactBootstrap */ 7);
+	
+	var RegistrationForm = React.createClass({displayName: "RegistrationForm",
+		
+		render:function() {
+			return(
+				React.createElement(ReactBootstrap.Panel, {header: "Registration", bsStyle: "primary"}, 
+					"Panel content"
+				)
+			);
+		}
+	});
+	
+	module.exports = RegistrationForm;
 
 /***/ }
 /******/ ]);
