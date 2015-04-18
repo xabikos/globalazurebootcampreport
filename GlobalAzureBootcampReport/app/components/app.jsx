@@ -1,4 +1,5 @@
 ﻿var React = require('react');
+var ReactBootstrap = require('reactBootstrap');
 
 var NavigationBar = require('./NavigationBar');
 var UsersStats = require('./UsersStats');
@@ -8,7 +9,13 @@ class App extends React.Component {
 	return (
 		<div>
 			<NavigationBar />
-			<UsersStats usersStats={this.props.initialStats} />			
+			<ReactBootstrap.Grid fluid={false} >
+				<ReactBootstrap.Row>
+					<ReactBootstrap.Col xs={6} md={4}>
+						<UsersStats usersStats={this.props.initialStats} />
+					</ReactBootstrap.Col>
+				</ReactBootstrap.Row>
+			</ReactBootstrap.Grid>
 		</div>
 	);
   }
