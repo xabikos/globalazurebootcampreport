@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using GlobalAzureBootcampReport.Azure;
+using GlobalAzureBootcampReport.Hubs;
 using GlobalAzureBootcampReport.Twitter;
+using Microsoft.AspNet.SignalR;
 
 namespace GlobalAzureBootcampReport.Controllers
 {
@@ -9,6 +12,9 @@ namespace GlobalAzureBootcampReport.Controllers
     {
         private readonly ITwitterManager _twitterManager;
         private readonly ITweetsRepository _tweetsRepository;
+
+        private readonly Lazy<IHubContext> _context =
+            new Lazy<IHubContext>(() => GlobalHost.ConnectionManager.GetHubContext<UsersStatsHub>());
 
         public HomeController(ITwitterManager twitterManager, ITweetsRepository tweetsRepository)
         {
@@ -20,6 +26,13 @@ namespace GlobalAzureBootcampReport.Controllers
         {
             var stats = _tweetsRepository.GetTopUserStats(10);
             return View(stats);
+        }
+
+        public ActionResult DummyUpdate()
+        {
+            var stats = _tweetsRepository.GetTopUserStats(10).Reverse();
+            _context.Value.Clients.All.updateUsersStats(stats);
+            return new EmptyResult();
         }
 
         public ActionResult StartListening()

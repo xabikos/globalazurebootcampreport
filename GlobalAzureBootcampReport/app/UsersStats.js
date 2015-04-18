@@ -5,7 +5,7 @@ var UsersStats = {
         updateUsersStatsCallback = callback;
     },
     
-    UpdateUserStats: function (newStats) {
+    updateUserStats: function (newStats) {
         updateUsersStatsCallback(newStats);
     }
 };

@@ -1,6 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
-using System.Web.Optimization.React;
+﻿using System.Web.Optimization;
 
 namespace GlobalAzureBootcampReport
 {
@@ -18,9 +16,10 @@ namespace GlobalAzureBootcampReport
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js",
-                      "~/Scripts/react-bootstrap.min.js"));
+                        "~/Scripts/jquery.signalR-2.2.0.min.js",
+                        "~/Scripts/bootstrap.js",
+                        "~/Scripts/respond.js",
+                        "~/Scripts/react-bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
