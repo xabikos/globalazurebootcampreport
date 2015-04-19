@@ -343,14 +343,14 @@
     <Compile Include="Models\Tweet.cs" />
     <Compile Include="Models\UserStat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Twitter\ITwitterManager.cs" />
     <Compile Include="Twitter\TwitterManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\UsersStats.js" />
+    <Content Include="app\security.js" />
+    <Content Include="app\usersStats.js" />
     <Content Include="Scripts\build\client.bundle.js" />
     <Content Include="Scripts\build\index.js" />
     <Content Include="Scripts\build\client.js" />
@@ -362,9 +362,10 @@
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="webpack.config.js" />
-    <Content Include="app\components\usersStats.jsx" />
+    <Content Include="app\components\usersStatsList.jsx" />
     <Content Include="app\components\registrationForm.jsx" />
     <Content Include="app\components\securityController.jsx" />
+    <Content Include="app\components\userInfo.jsx" />
     <None Include="ClearScript.V8\ClearScriptV8-32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

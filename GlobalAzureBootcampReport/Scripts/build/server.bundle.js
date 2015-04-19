@@ -73,27 +73,7 @@
 
 /***/ },
 /* 3 */,
-/* 4 */
-/*!********************************************************************************************!*\
-  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/UsersStats.js ***!
-  \********************************************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	var updateUsersStatsCallback;
-	
-	var UsersStats = {
-	    addChangeListener: function (callback) {
-	        updateUsersStatsCallback = callback;
-	    },
-	    
-	    updateUserStats: function (newStats) {
-	        updateUsersStatsCallback(newStats);
-	    }
-	};
-	
-	module.exports = UsersStats;
-
-/***/ },
+/* 4 */,
 /* 5 */
 /*!*************************************************************************************************!*\
   !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/components/app.jsx ***!
@@ -104,7 +84,7 @@
 	var ReactBootstrap = __webpack_require__(/*! reactBootstrap */ 7);
 	
 	var NavigationBar = __webpack_require__(/*! ./NavigationBar */ 8);
-	var UsersStats = __webpack_require__(/*! ./UsersStats */ 9);
+	var UsersStatsList = __webpack_require__(/*! ./UsersStatsList */ 9);
 	var SecurityController = __webpack_require__(/*! ./SecurityController */ 10);
 	
 	var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____Class0.hasOwnProperty(____Class0____Key)){App[____Class0____Key]=____Class0[____Class0____Key];}}var ____SuperProtoOf____Class0=____Class0===null?null:____Class0.prototype;App.prototype=Object.create(____SuperProtoOf____Class0);App.prototype.constructor=App;App.__superConstructor__=____Class0;function App(){"use strict";if(____Class0!==null){____Class0.apply(this,arguments);}}
@@ -115,7 +95,7 @@
 				React.createElement(ReactBootstrap.Grid, {fluid: false}, 
 					React.createElement(ReactBootstrap.Row, null, 
 						React.createElement(ReactBootstrap.Col, {xs: 12, md: 3}, 
-							React.createElement(UsersStats, {usersStats: this.props.initialStats})
+							React.createElement(UsersStatsList, {usersStats: this.props.initialStats})
 						), 
 						React.createElement(ReactBootstrap.Col, {xs: 12, md: 6}
 						), 
@@ -182,28 +162,28 @@
 
 /***/ },
 /* 9 */
-/*!********************************************************************************************************!*\
-  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/components/UsersStats.jsx ***!
-  \********************************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/components/UsersStatsList.jsx ***!
+  \************************************************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(/*! react */ 6);
 	var ReactBootstrap = __webpack_require__(/*! reactBootstrap */ 7);
 	
-	var usersStatsStore = __webpack_require__(/*! ../UsersStats */ 4);
+	var usersStats = __webpack_require__(/*! ../usersStats */ 11);
 	
-	var UsersStats = React.createClass({displayName: "UsersStats",
+	var UsersStatsList = React.createClass({displayName: "UsersStatsList",
 		
 		getInitialState:function(){
 			return {stats: this.props.usersStats};
 		},
 	
 		componentDidMount:function(){
-			usersStatsStore.addChangeListener(this.onChange);
+			usersStats.addChangeListener(this.onChange);
 		},
 	
 		render:function() {
-			var usersStats = this.state.stats.map(function(userStat) 
+			var stats = this.state.stats.map(function(userStat) 
 				{return React.createElement("li", null, 
 					"Name: ", userStat.Name, 
 					"Count: ", userStat.TweetsNumber
@@ -213,7 +193,7 @@
 				React.createElement(ReactBootstrap.Panel, {header: "Users Statistcis", bsStyle: "info"}, 
 					React.createElement("h1", null, "Users Stats"), 
 					React.createElement("ol", null, 
-						usersStats
+						stats
 					)
 				)
 			);
@@ -225,7 +205,7 @@
 	
 	});
 	
-	module.exports = UsersStats;
+	module.exports = UsersStatsList;
 
 /***/ },
 /* 10 */
@@ -236,7 +216,10 @@
 
 	var React = __webpack_require__(/*! react */ 6);
 	
-	var RegistrationForm = __webpack_require__(/*! ./RegistrationForm */ 11);
+	var RegistrationForm = __webpack_require__(/*! ./RegistrationForm */ 12);
+	var UserInfo = __webpack_require__(/*! ./UserInfo */ 13);
+	
+	var security = __webpack_require__(/*! ../security */ 14);
 	
 	var SecurityController = React.createClass({displayName: "SecurityController",
 		
@@ -246,10 +229,18 @@
 			};
 		},
 	
+		componentDidMount:function(){
+			security.addChangeListener(this.onChange);
+		},
+	
 		render:function() {
 			return (
-				this.state.isAuthenticated ? React.createElement("div", null, "User is auth") : React.createElement(RegistrationForm, null)
+				this.state.isAuthenticated ? React.createElement(UserInfo, null) : React.createElement(RegistrationForm, null)
 			);
+		},
+	
+		onChange:function(status){
+			this.setState({isAuthenticated: status.isAuthenticated});
 		}
 	});
 	
@@ -257,6 +248,27 @@
 
 /***/ },
 /* 11 */
+/*!********************************************************************************************!*\
+  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/usersStats.js ***!
+  \********************************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var updateUsersStatsCallback;
+	
+	var usersStats = {
+	    addChangeListener: function (callback) {
+	        updateUsersStatsCallback = callback;
+	    },
+	    
+	    updateUserStats: function (newStats) {
+	        updateUsersStatsCallback(newStats);
+	    }
+	};
+	
+	module.exports = usersStats;
+
+/***/ },
+/* 12 */
 /*!**************************************************************************************************************!*\
   !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/components/RegistrationForm.jsx ***!
   \**************************************************************************************************************/
@@ -265,47 +277,48 @@
 	var React = __webpack_require__(/*! react */ 6);
 	var ReactBootstrap = __webpack_require__(/*! reactBootstrap */ 7);
 	
+	var security = __webpack_require__(/*! ../security */ 14);
+	
 	var RegistrationForm = React.createClass({displayName: "RegistrationForm",
 		
 		getInitialState:function(){
 			return {
-				firstName: '',
-				lastName: '',
+				userName: '',			
 				email: '',
-				password: ''
+				password: '',
+				confirmPassword: ''
 			};
 		},
 	
 		handleChange:function(e){
 			switch (e.target.id) {
-				case 'registrationFirstName':
-					this.setState({firstName: e.target.value});
-					break;
-				case 'registrationLastName':
-					this.setState({lastName: e.target.value});
+				case 'registrationUserName':
+					this.setState({userName: e.target.value});
 					break;
 				case 'registrationEmail':
 					this.setState({email: e.target.value});
 					break;
 				case 'registrationPassword':
-					this.setState({password: e.target.value});
+					this.setState({
+						password: e.target.value,
+						confirmPassword: e.target.value
+					});
 					break;
 			}
 		},
 	
-		submit:function(){
-			console.log('Registration form submit');
+		register:function(){
+			security.register(this.state);
 		},
 	
 		render:function() {
 			return(
 				React.createElement(ReactBootstrap.Panel, {header: "Registration", bsStyle: "primary"}, 
 					React.createElement("form", {className: "form-horizontal"}, 
-						React.createElement(ReactBootstrap.Input, {type: "text", id: "registrationFirstName", value: this.state.firstName, onChange: this.handleChange, label: "Name", labelClassName: "col-xs-2", wrapperClassName: "col-xs-12"}), 
-						React.createElement(ReactBootstrap.Input, {type: "text", id: "registrationLastName", value: this.state.lastName, onChange: this.handleChange, label: "Surname", labelClassName: "col-xs-2", wrapperClassName: "col-xs-12"}), 
+						React.createElement(ReactBootstrap.Input, {type: "text", id: "registrationUserName", value: this.state.userName, onChange: this.handleChange, label: "UserName", labelClassName: "col-xs-2", wrapperClassName: "col-xs-12"}), 
 						React.createElement(ReactBootstrap.Input, {type: "email", id: "registrationEmail", value: this.state.email, onChange: this.handleChange, label: "Email", labelClassName: "col-xs-2", wrapperClassName: "col-xs-12"}), 
 						React.createElement(ReactBootstrap.Input, {type: "password", id: "registrationPassword", value: this.state.password, onChange: this.handleChange, label: "Password", labelClassName: "col-xs-2", wrapperClassName: "col-xs-12"}), 
-						React.createElement(ReactBootstrap.Button, {onClick: this.submit, bsStyle: "primary"}, "Register")
+						React.createElement(ReactBootstrap.Button, {onClick: this.register, bsStyle: "primary"}, "Register")
 					)
 				)
 			);
@@ -313,6 +326,73 @@
 	});
 	
 	module.exports = RegistrationForm;
+
+/***/ },
+/* 13 */
+/*!******************************************************************************************************!*\
+  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/components/UserInfo.jsx ***!
+  \******************************************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 6);
+	var ReactBootstrap = __webpack_require__(/*! reactBootstrap */ 7);
+	
+	var security = __webpack_require__(/*! ../security */ 14);
+	
+	var UserInfo = React.createClass({displayName: "UserInfo",
+		
+		logout:function(){
+			security.logout();
+		},
+	
+		render:function() {
+			return(
+				React.createElement(ReactBootstrap.Panel, {header: "User Info", bsStyle: "primary"}, 
+					React.createElement("div", null, "User is auth"), 
+					React.createElement(ReactBootstrap.Button, {onClick: this.logout, bsStyle: "primary"}, "Log out")
+				)
+			);
+		}
+	});
+	
+	module.exports = UserInfo;
+
+/***/ },
+/* 14 */
+/*!******************************************************************************************!*\
+  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/security.js ***!
+  \******************************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var userAuthenticationCallback;
+	
+	var security = {
+	    addChangeListener: function (callback) {
+	        userAuthenticationCallback = callback;
+	    },
+	    
+	    updateUserSecurity: function (status) {
+	        updateUsersStatsCallback(status);
+	    },
+	
+	    register: function (registrationData) {
+	        $.post("api/Account/Register", registrationData, function (result) {
+	            if (result.isAuthenticated) {
+	                userAuthenticationCallback({ isAuthenticated: true });
+	            }
+	        });
+	    },
+	
+	    logout: function() {
+	        $.post("api/Account/Logout", function (result) {
+	            if (result.isLoggedOut) {
+	                userAuthenticationCallback({ isAuthenticated: false });
+	            }
+	        });
+	    }
+	};
+	
+	module.exports = security;
 
 /***/ }
 /******/ ]);

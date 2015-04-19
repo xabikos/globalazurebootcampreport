@@ -2,7 +2,7 @@
 var ReactBootstrap = require('reactBootstrap');
 
 var NavigationBar = require('./NavigationBar');
-var UsersStats = require('./UsersStats');
+var UsersStatsList = require('./UsersStatsList');
 var SecurityController = require('./SecurityController');
 
 class App extends React.Component {
@@ -13,7 +13,7 @@ class App extends React.Component {
 			<ReactBootstrap.Grid fluid={false} >
 				<ReactBootstrap.Row>
 					<ReactBootstrap.Col xs={12} md={3}>
-						<UsersStats usersStats={this.props.initialStats} />
+						<UsersStatsList usersStats={this.props.initialStats} />
 					</ReactBootstrap.Col>
 					<ReactBootstrap.Col xs={12} md={6}>
 					</ReactBootstrap.Col>

@@ -1,20 +1,20 @@
 ﻿var React = require('react');
 var ReactBootstrap = require('reactBootstrap');
 
-var usersStatsStore = require('../UsersStats');
+var usersStats = require('../usersStats');
 
-var UsersStats = React.createClass({
+var UsersStatsList = React.createClass({
 	
 	getInitialState(){
 		return {stats: this.props.usersStats};
 	},
 
 	componentDidMount(){
-		usersStatsStore.addChangeListener(this.onChange);
+		usersStats.addChangeListener(this.onChange);
 	},
 
 	render() {
-		var usersStats = this.state.stats.map(userStat =>
+		var stats = this.state.stats.map(userStat =>
 			<li>
 				Name: {userStat.Name}
 				Count: {userStat.TweetsNumber}
@@ -24,7 +24,7 @@ var UsersStats = React.createClass({
 			<ReactBootstrap.Panel header='Users Statistcis' bsStyle='info'>
 				<h1>Users Stats</h1>
 				<ol>
-					{usersStats}
+					{stats}
 				</ol>
 			</ReactBootstrap.Panel>
 		);
@@ -36,4 +36,4 @@ var UsersStats = React.createClass({
 
 });
 
-module.exports = UsersStats;
+module.exports = UsersStatsList;
