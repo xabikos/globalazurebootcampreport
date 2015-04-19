@@ -1,5 +1,6 @@
 ﻿var React = require('react');
 
+var LoginForm = require('./LoginForm');
 var RegistrationForm = require('./RegistrationForm');
 var UserInfo = require('./UserInfo');
 
@@ -19,7 +20,12 @@ var SecurityController = React.createClass({
 
 	render() {
 		return (
-			this.state.isAuthenticated ? <UserInfo /> : <RegistrationForm />
+			this.state.isAuthenticated ? 
+				<UserInfo /> : 
+				(<div>
+					<LoginForm />
+					<RegistrationForm />
+				</div>)
 		);
 	},
 

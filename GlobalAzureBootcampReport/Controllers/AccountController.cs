@@ -45,7 +45,7 @@ namespace GlobalAzureBootcampReport.Controllers
         [Route("Logout")]
         public IHttpActionResult Logout()
         {
-            Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
+            Authentication.SignOut();
             return Ok(new { isLoggedOut = true });
         }
 
@@ -78,7 +78,26 @@ namespace GlobalAzureBootcampReport.Controllers
             return Ok(new {isAuthenticated = true});
         }
 
-        
+        [AllowAnonymous]
+        [Route("Login")]
+        public async Task<IHttpActionResult> Login(LoginBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
+            var user = await UserManager.FindByNameAsync(model.UserName);
+
+            if (user==null)
+            {
+                return NotFound();
+            }
+
+            var signinManager = new SignInManager<ApplicationUser, string>(UserManager, Authentication);
+            var result = signinManager.PasswordSignIn(model.UserName, model.Password, true, false);
+            return result == SignInStatus.Success ? Ok(new {isAuthenticated = true}) : Ok(new {isAuthenticated = false});
+        }
 
         protected override void Dispose(bool disposing)
         {

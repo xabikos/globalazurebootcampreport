@@ -17,6 +17,14 @@ var security = {
         });
     },
 
+    login:function(loginData) {
+        $.post("api/Account/Login", loginData, function (result) {
+            if (result.isAuthenticated) {
+                userAuthenticationCallback({ isAuthenticated: true });
+            }
+        });
+    },
+
     logout: function() {
         $.post("api/Account/Logout", function (result) {
             if (result.isLoggedOut) {

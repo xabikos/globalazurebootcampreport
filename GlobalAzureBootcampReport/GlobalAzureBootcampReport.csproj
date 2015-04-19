@@ -349,8 +349,8 @@
     <Compile Include="Twitter\TwitterManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\usersStats.js" />
     <Content Include="app\security.js" />
-    <Content Include="app\UsersStats.js" />
     <Content Include="Scripts\build\client.bundle.js" />
     <Content Include="Scripts\build\index.js" />
     <Content Include="Scripts\build\client.js" />
@@ -366,6 +366,7 @@
     <Content Include="app\components\registrationForm.jsx" />
     <Content Include="app\components\securityController.jsx" />
     <Content Include="app\components\userInfo.jsx" />
+    <Content Include="app\components\loginForm.jsx" />
     <None Include="ClearScript.V8\ClearScriptV8-32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
