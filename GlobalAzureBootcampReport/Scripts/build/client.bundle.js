@@ -42,51 +42,36 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/*!*******************!*\
-  !*** ./client.js ***!
-  \*******************/
 /***/ function(module, exports, __webpack_require__) {
 
 	// All JavaScript in here will be loaded client-side
-	var Components = __webpack_require__(/*! expose?Components!./index */ 1);
-	var UsersStats = __webpack_require__(/*! expose?UsersStats!../../app/UsersStats */ 3)
+	var Components = __webpack_require__(1);
+	var UsersStats = __webpack_require__(3)
 
 /***/ },
 /* 1 */
-/*!****************************************************************************************************************!*\
-  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/~/expose-loader?Components!./index.js ***!
-  \****************************************************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["Components"] = __webpack_require__(/*! -!./index.js */ 2);
+	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["Components"] = __webpack_require__(2);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
 /* 2 */
-/*!******************!*\
-  !*** ./index.js ***!
-  \******************/
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	    App: __webpack_require__(/*! ../../app/components/app */ 5)
+	    App: __webpack_require__(5)
 	};
 
 /***/ },
 /* 3 */
-/*!******************************************************************************************************************************************************************************************!*\
-  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/~/expose-loader?UsersStats!C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/UsersStats.js ***!
-  \******************************************************************************************************************************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["UsersStats"] = __webpack_require__(/*! -!C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/UsersStats.js */ 4);
+	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["UsersStats"] = __webpack_require__(4);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
 /* 4 */
-/*!********************************************************************************************!*\
-  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/UsersStats.js ***!
-  \********************************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var updateUsersStatsCallback;
@@ -105,17 +90,14 @@
 
 /***/ },
 /* 5 */
-/*!*************************************************************************************************!*\
-  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/components/app.jsx ***!
-  \*************************************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(/*! react */ 6);
-	var ReactBootstrap = __webpack_require__(/*! reactBootstrap */ 7);
+	var React = __webpack_require__(6);
+	var ReactBootstrap = __webpack_require__(7);
 	
-	var NavigationBar = __webpack_require__(/*! ./NavigationBar */ 8);
-	var UsersStatsList = __webpack_require__(/*! ./UsersStatsList */ 9);
-	var SecurityController = __webpack_require__(/*! ./SecurityController */ 10);
+	var NavigationBar = __webpack_require__(8);
+	var UsersStatsList = __webpack_require__(9);
+	var SecurityController = __webpack_require__(10);
 	
 	var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____Class0.hasOwnProperty(____Class0____Key)){App[____Class0____Key]=____Class0[____Class0____Key];}}var ____SuperProtoOf____Class0=____Class0===null?null:____Class0.prototype;App.prototype=Object.create(____SuperProtoOf____Class0);App.prototype.constructor=App;App.__superConstructor__=____Class0;function App(){"use strict";if(____Class0!==null){____Class0.apply(this,arguments);}}
 	  Object.defineProperty(App.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
@@ -143,31 +125,22 @@
 
 /***/ },
 /* 6 */
-/*!************************!*\
-  !*** external "React" ***!
-  \************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = React;
 
 /***/ },
 /* 7 */
-/*!*********************************!*\
-  !*** external "ReactBootstrap" ***!
-  \*********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = ReactBootstrap;
 
 /***/ },
 /* 8 */
-/*!***********************************************************************************************************!*\
-  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/components/NavigationBar.jsx ***!
-  \***********************************************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(/*! react */ 6);
-	var ReactBootstrap = __webpack_require__(/*! reactBootstrap */ 7);
+	var React = __webpack_require__(6);
+	var ReactBootstrap = __webpack_require__(7);
 	
 	var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____Class1.hasOwnProperty(____Class1____Key)){NavigationBar[____Class1____Key]=____Class1[____Class1____Key];}}var ____SuperProtoOf____Class1=____Class1===null?null:____Class1.prototype;NavigationBar.prototype=Object.create(____SuperProtoOf____Class1);NavigationBar.prototype.constructor=NavigationBar;NavigationBar.__superConstructor__=____Class1;function NavigationBar(){"use strict";if(____Class1!==null){____Class1.apply(this,arguments);}}
 		Object.defineProperty(NavigationBar.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
@@ -192,15 +165,12 @@
 
 /***/ },
 /* 9 */
-/*!************************************************************************************************************!*\
-  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/components/UsersStatsList.jsx ***!
-  \************************************************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(/*! react */ 6);
-	var ReactBootstrap = __webpack_require__(/*! reactBootstrap */ 7);
+	var React = __webpack_require__(6);
+	var ReactBootstrap = __webpack_require__(7);
 	
-	var usersStats = __webpack_require__(/*! ../usersStats */ 11);
+	var usersStats = __webpack_require__(4);
 	
 	var UsersStatsList = React.createClass({displayName: "UsersStatsList",
 		
@@ -239,17 +209,14 @@
 
 /***/ },
 /* 10 */
-/*!****************************************************************************************************************!*\
-  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/components/SecurityController.jsx ***!
-  \****************************************************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(/*! react */ 6);
+	var React = __webpack_require__(6);
 	
-	var RegistrationForm = __webpack_require__(/*! ./RegistrationForm */ 12);
-	var UserInfo = __webpack_require__(/*! ./UserInfo */ 13);
+	var RegistrationForm = __webpack_require__(11);
+	var UserInfo = __webpack_require__(12);
 	
-	var security = __webpack_require__(/*! ../security */ 14);
+	var security = __webpack_require__(13);
 	
 	var SecurityController = React.createClass({displayName: "SecurityController",
 		
@@ -278,36 +245,12 @@
 
 /***/ },
 /* 11 */
-/*!********************************************************************************************!*\
-  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/usersStats.js ***!
-  \********************************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var updateUsersStatsCallback;
+	var React = __webpack_require__(6);
+	var ReactBootstrap = __webpack_require__(7);
 	
-	var usersStats = {
-	    addChangeListener: function (callback) {
-	        updateUsersStatsCallback = callback;
-	    },
-	    
-	    updateUserStats: function (newStats) {
-	        updateUsersStatsCallback(newStats);
-	    }
-	};
-	
-	module.exports = usersStats;
-
-/***/ },
-/* 12 */
-/*!**************************************************************************************************************!*\
-  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/components/RegistrationForm.jsx ***!
-  \**************************************************************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(/*! react */ 6);
-	var ReactBootstrap = __webpack_require__(/*! reactBootstrap */ 7);
-	
-	var security = __webpack_require__(/*! ../security */ 14);
+	var security = __webpack_require__(13);
 	
 	var RegistrationForm = React.createClass({displayName: "RegistrationForm",
 		
@@ -358,16 +301,13 @@
 	module.exports = RegistrationForm;
 
 /***/ },
-/* 13 */
-/*!******************************************************************************************************!*\
-  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/components/UserInfo.jsx ***!
-  \******************************************************************************************************/
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(/*! react */ 6);
-	var ReactBootstrap = __webpack_require__(/*! reactBootstrap */ 7);
+	var React = __webpack_require__(6);
+	var ReactBootstrap = __webpack_require__(7);
 	
-	var security = __webpack_require__(/*! ../security */ 14);
+	var security = __webpack_require__(13);
 	
 	var UserInfo = React.createClass({displayName: "UserInfo",
 		
@@ -388,10 +328,7 @@
 	module.exports = UserInfo;
 
 /***/ },
-/* 14 */
-/*!******************************************************************************************!*\
-  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/security.js ***!
-  \******************************************************************************************/
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var userAuthenticationCallback;

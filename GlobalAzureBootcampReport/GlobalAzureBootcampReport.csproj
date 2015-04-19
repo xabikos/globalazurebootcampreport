@@ -350,7 +350,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\security.js" />
-    <Content Include="app\usersStats.js" />
+    <Content Include="app\UsersStats.js" />
     <Content Include="Scripts\build\client.bundle.js" />
     <Content Include="Scripts\build\index.js" />
     <Content Include="Scripts\build\client.js" />
