@@ -1,6 +1,6 @@
 ﻿var updateUsersStatsCallback;
 
-var UsersStats = {
+var usersStats = {
     addChangeListener: function (callback) {
         updateUsersStatsCallback = callback;
     },
@@ -10,4 +10,4 @@ var UsersStats = {
     }
 };
 
-module.exports = UsersStats;
+module.exports = usersStats;
