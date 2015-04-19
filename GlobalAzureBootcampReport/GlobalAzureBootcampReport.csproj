@@ -170,6 +170,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\React.Web.Mvc4.1.5.0\lib\net40\React.Web.Mvc4.dll</HintPath>
     </Reference>
+    <Reference Include="StackExchange.Redis">
+      <HintPath>..\packages\StackExchange.Redis.1.0.414\lib\net45\StackExchange.Redis.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
