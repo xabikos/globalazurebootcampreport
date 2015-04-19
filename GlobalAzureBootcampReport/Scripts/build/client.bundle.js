@@ -115,7 +115,7 @@
 	
 	var NavigationBar = __webpack_require__(/*! ./NavigationBar */ 8);
 	var UsersStats = __webpack_require__(/*! ./UsersStats */ 9);
-	var RegistrationForm = __webpack_require__(/*! ./RegistrationForm */ 10);
+	var SecurityController = __webpack_require__(/*! ./SecurityController */ 10);
 	
 	var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____Class0.hasOwnProperty(____Class0____Key)){App[____Class0____Key]=____Class0[____Class0____Key];}}var ____SuperProtoOf____Class0=____Class0===null?null:____Class0.prototype;App.prototype=Object.create(____SuperProtoOf____Class0);App.prototype.constructor=App;App.__superConstructor__=____Class0;function App(){"use strict";if(____Class0!==null){____Class0.apply(this,arguments);}}
 	  Object.defineProperty(App.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
@@ -124,13 +124,13 @@
 				React.createElement(NavigationBar, null), 
 				React.createElement(ReactBootstrap.Grid, {fluid: false}, 
 					React.createElement(ReactBootstrap.Row, null, 
-						React.createElement(ReactBootstrap.Col, {xs: 12, md: 4}, 
+						React.createElement(ReactBootstrap.Col, {xs: 12, md: 3}, 
 							React.createElement(UsersStats, {usersStats: this.props.initialStats})
 						), 
 						React.createElement(ReactBootstrap.Col, {xs: 12, md: 6}
 						), 
-						React.createElement(ReactBootstrap.Col, {xs: 12, md: 2}, 
-							React.createElement(RegistrationForm, null)
+						React.createElement(ReactBootstrap.Col, {xs: 12, md: 3}, 
+							React.createElement(SecurityController, {isAuthenticated: this.props.isAuthenticated})
 						)
 					)
 				)
@@ -239,6 +239,34 @@
 
 /***/ },
 /* 10 */
+/*!****************************************************************************************************************!*\
+  !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/components/SecurityController.jsx ***!
+  \****************************************************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 6);
+	
+	var RegistrationForm = __webpack_require__(/*! ./RegistrationForm */ 11);
+	
+	var SecurityController = React.createClass({displayName: "SecurityController",
+		
+		getInitialState:function(){
+			return {
+				isAuthenticated : this.props.isAuthenticated
+			};
+		},
+	
+		render:function() {
+			return (
+				this.state.isAuthenticated ? React.createElement("div", null, "User is auth") : React.createElement(RegistrationForm, null)
+			);
+		}
+	});
+	
+	module.exports = SecurityController;
+
+/***/ },
+/* 11 */
 /*!**************************************************************************************************************!*\
   !*** C:/Development/globalazurebootcampreport/GlobalAzureBootcampReport/app/components/RegistrationForm.jsx ***!
   \**************************************************************************************************************/

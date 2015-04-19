@@ -10,7 +10,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @Html.React("Components.App", new {initialStats =  Model}, containerId: "app")
+    @Html.React("Components.App", new {initialStats =  Model, userAuthinticated = User.Identity.IsAuthenticated}, containerId: "app")
 
     @Scripts.Render("~/bundles/jquery")
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/react-with-addons.min.js"></script>

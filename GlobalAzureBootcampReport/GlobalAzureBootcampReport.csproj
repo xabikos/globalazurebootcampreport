@@ -364,6 +364,7 @@
     <Content Include="webpack.config.js" />
     <Content Include="app\components\usersStats.jsx" />
     <Content Include="app\components\registrationForm.jsx" />
+    <Content Include="app\components\securityController.jsx" />
     <None Include="ClearScript.V8\ClearScriptV8-32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
