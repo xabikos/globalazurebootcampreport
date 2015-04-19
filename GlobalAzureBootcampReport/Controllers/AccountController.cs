@@ -75,7 +75,7 @@ namespace GlobalAzureBootcampReport.Controllers
             var signinManager = new SignInManager<ApplicationUser, string>(UserManager, Authentication);
             signinManager.SignIn(user, true, false);
 
-            return Ok(new {isAuthenticated = true});
+            return Ok(new {isAuthenticated = true, user});
         }
 
         [AllowAnonymous]
@@ -96,7 +96,11 @@ namespace GlobalAzureBootcampReport.Controllers
 
             var signinManager = new SignInManager<ApplicationUser, string>(UserManager, Authentication);
             var result = signinManager.PasswordSignIn(model.UserName, model.Password, true, false);
-            return result == SignInStatus.Success ? Ok(new {isAuthenticated = true}) : Ok(new {isAuthenticated = false});
+            if (result==SignInStatus.Success)
+            {
+                return Ok(new {isAuthenticated = true, user});
+            }
+            return Ok(new {isAuthenticated = false});
         }
 
         protected override void Dispose(bool disposing)

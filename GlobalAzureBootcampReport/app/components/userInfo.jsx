@@ -10,11 +10,19 @@ var UserInfo = React.createClass({
 	},
 
 	render() {
+		var Panel = ReactBootstrap.Panel;
+		var Button = ReactBootstrap.Button;
+		var user = this.props.user;
 		return(
-			<ReactBootstrap.Panel header='User Info' bsStyle='primary'>
-				<div>User is auth</div>
-				<ReactBootstrap.Button onClick={this.logout} bsStyle='primary'>Log out</ReactBootstrap.Button>
-			</ReactBootstrap.Panel>
+			<Panel header='User Info' bsStyle='primary'>
+				<div>
+					UserName: {user.UserName}
+				</div>
+				<div>
+					Email: {user.Email}
+				</div>
+				<Button onClick={this.logout} bsStyle='primary'>Log out</Button>
+			</Panel>
 		);
 	}
 });

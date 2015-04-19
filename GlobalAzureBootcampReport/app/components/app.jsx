@@ -18,7 +18,7 @@ class App extends React.Component {
 					<ReactBootstrap.Col xs={12} md={6}>
 					</ReactBootstrap.Col>
 					<ReactBootstrap.Col xs={12} md={3}>
-						<SecurityController isAuthenticated={this.props.isAuthenticated}/>
+						<SecurityController isAuthenticated={this.props.isAuthenticated} user={this.props.user}/>
 					</ReactBootstrap.Col>
 				</ReactBootstrap.Row>
 			</ReactBootstrap.Grid>

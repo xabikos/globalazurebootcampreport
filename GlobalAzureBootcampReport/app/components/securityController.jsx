@@ -10,7 +10,8 @@ var SecurityController = React.createClass({
 	
 	getInitialState(){
 		return {
-			isAuthenticated : this.props.isAuthenticated
+			isAuthenticated : this.props.isAuthenticated,
+			user: this.props.user
 		};
 	},
 
@@ -21,7 +22,7 @@ var SecurityController = React.createClass({
 	render() {
 		return (
 			this.state.isAuthenticated ? 
-				<UserInfo /> : 
+				<UserInfo user={this.state.user} /> :
 				(<div>
 					<LoginForm />
 					<RegistrationForm />

@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using GlobalAzureBootcampReport.Azure;
 using GlobalAzureBootcampReport.Hubs;
+using GlobalAzureBootcampReport.Models;
 using GlobalAzureBootcampReport.Twitter;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.SignalR;
 
 namespace GlobalAzureBootcampReport.Controllers
@@ -25,7 +29,16 @@ namespace GlobalAzureBootcampReport.Controllers
         public ActionResult Index()
         {
             var stats = _tweetsRepository.GetTopUserStats(10);
-            return View(stats);
+            ApplicationUser user = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                user = Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindByName(User.Identity.Name);
+            }
+            return View(new IndexViewModel
+            {
+                UsersStats = stats,
+                User = user
+            });
         }
 
         public ActionResult DummyUpdate()

@@ -12,7 +12,7 @@ var security = {
     register: function (registrationData) {
         $.post("api/Account/Register", registrationData, function (result) {
             if (result.isAuthenticated) {
-                userAuthenticationCallback({ isAuthenticated: true });
+                userAuthenticationCallback(result);
             }
         });
     },
@@ -20,7 +20,7 @@ var security = {
     login:function(loginData) {
         $.post("api/Account/Login", loginData, function (result) {
             if (result.isAuthenticated) {
-                userAuthenticationCallback({ isAuthenticated: true });
+                userAuthenticationCallback(result);
             }
         });
     },

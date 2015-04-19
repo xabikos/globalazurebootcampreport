@@ -33,6 +33,7 @@ var LogIn = React.createClass({
 		var Panel = ReactBootstrap.Panel;
 		var Input = ReactBootstrap.Input;
 		var Button = ReactBootstrap.Button;
+
 		return(
 			<Panel header='Login' bsStyle='primary'>
 				<form className='form-horizontal'>

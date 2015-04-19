@@ -112,7 +112,7 @@
 						React.createElement(ReactBootstrap.Col, {xs: 12, md: 6}
 						), 
 						React.createElement(ReactBootstrap.Col, {xs: 12, md: 3}, 
-							React.createElement(SecurityController, {isAuthenticated: this.props.isAuthenticated})
+							React.createElement(SecurityController, {isAuthenticated: this.props.isAuthenticated, user: this.props.user})
 						)
 					)
 				)
@@ -223,7 +223,8 @@
 		
 		getInitialState:function(){
 			return {
-				isAuthenticated : this.props.isAuthenticated
+				isAuthenticated : this.props.isAuthenticated,
+				user: this.props.user
 			};
 		},
 	
@@ -234,7 +235,7 @@
 		render:function() {
 			return (
 				this.state.isAuthenticated ? 
-					React.createElement(UserInfo, null) : 
+					React.createElement(UserInfo, {user: this.state.user}) :
 					(React.createElement("div", null, 
 						React.createElement(LoginForm, null), 
 						React.createElement(RegistrationForm, null)
@@ -288,6 +289,7 @@
 			var Panel = ReactBootstrap.Panel;
 			var Input = ReactBootstrap.Input;
 			var Button = ReactBootstrap.Button;
+	
 			return(
 				React.createElement(Panel, {header: "Login", bsStyle: "primary"}, 
 					React.createElement("form", {className: "form-horizontal"}, 
@@ -375,10 +377,18 @@
 		},
 	
 		render:function() {
+			var Panel = ReactBootstrap.Panel;
+			var Button = ReactBootstrap.Button;
+			var user = this.props.user;
 			return(
-				React.createElement(ReactBootstrap.Panel, {header: "User Info", bsStyle: "primary"}, 
-					React.createElement("div", null, "User is auth"), 
-					React.createElement(ReactBootstrap.Button, {onClick: this.logout, bsStyle: "primary"}, "Log out")
+				React.createElement(Panel, {header: "User Info", bsStyle: "primary"}, 
+					React.createElement("div", null, 
+						"UserName: ", user.UserName
+					), 
+					React.createElement("div", null, 
+						"Email: ", user.Email
+					), 
+					React.createElement(Button, {onClick: this.logout, bsStyle: "primary"}, "Log out")
 				)
 			);
 		}
@@ -404,7 +414,7 @@
 	    register: function (registrationData) {
 	        $.post("api/Account/Register", registrationData, function (result) {
 	            if (result.isAuthenticated) {
-	                userAuthenticationCallback({ isAuthenticated: true });
+	                userAuthenticationCallback(result);
 	            }
 	        });
 	    },
@@ -412,7 +422,7 @@
 	    login:function(loginData) {
 	        $.post("api/Account/Login", loginData, function (result) {
 	            if (result.isAuthenticated) {
-	                userAuthenticationCallback({ isAuthenticated: true });
+	                userAuthenticationCallback(result);
 	            }
 	        });
 	    },
