@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace GlobalAzureBootcampReport.Twitter
 {
@@ -12,6 +13,14 @@ namespace GlobalAzureBootcampReport.Twitter
         /// </summary>
         void StartListening();
 
+        /// <summary>
+        /// Stops listening on the Twitter stream
+        /// </summary>
         void StopListening();
+
+        /// <summary>
+        /// Calculates the stats for the stored tweets in the table storage and initializes the redis cache 
+        /// </summary>
+        Task CalculateStats();
     }
 }

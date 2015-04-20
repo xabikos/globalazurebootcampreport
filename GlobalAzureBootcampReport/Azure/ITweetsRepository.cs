@@ -10,9 +10,9 @@ namespace GlobalAzureBootcampReport.Azure
     public interface ITweetsRepository
     {
         /// <summary>
-        /// Returns a collection with the top users stats based on the supplied <paramref name="topUsers"/>
+        /// Returns a collection with the users stats
         /// </summary>
-        IEnumerable<UserStat> GetTopUserStats(int topUsers);
+        IEnumerable<UserStat> GetUserStats();
 
         IEnumerable<Tweet> GetLatestTweets();
 

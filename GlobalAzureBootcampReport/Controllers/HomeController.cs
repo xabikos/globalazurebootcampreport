@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using GlobalAzureBootcampReport.Azure;
 using GlobalAzureBootcampReport.Hubs;
 using GlobalAzureBootcampReport.Models;
+using GlobalAzureBootcampReport.Redis;
 using GlobalAzureBootcampReport.Twitter;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -12,10 +15,11 @@ using Microsoft.AspNet.SignalR;
 
 namespace GlobalAzureBootcampReport.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AsyncController
     {
         private readonly ITwitterManager _twitterManager;
         private readonly ITweetsRepository _tweetsRepository;
+        private readonly ICache _cache;
 
         private readonly Lazy<IHubContext> _context =
             new Lazy<IHubContext>(() => GlobalHost.ConnectionManager.GetHubContext<UsersStatsHub>());
@@ -24,11 +28,13 @@ namespace GlobalAzureBootcampReport.Controllers
         {
             _twitterManager = twitterManager;
             _tweetsRepository = tweetsRepository;
+            _cache = new Cache();
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var stats = _tweetsRepository.GetTopUserStats(10);
+            var stats = await _cache.GetItemAsync<IEnumerable<UserStat>>(_cache.UsersStatsKey);
+            stats = stats.OrderByDescending(us => us.TweetsNumber).Take(10);
             var tweets = _tweetsRepository.GetLatestTweets();
             ApplicationUser user = null;
             if (User.Identity.IsAuthenticated)
@@ -45,7 +51,7 @@ namespace GlobalAzureBootcampReport.Controllers
 
         public ActionResult DummyUpdate()
         {
-            var stats = _tweetsRepository.GetTopUserStats(10).Reverse();
+            var stats = _tweetsRepository.GetUserStats(10).Reverse();
             _context.Value.Clients.All.updateUsersStats(stats);
             return new EmptyResult();
         }

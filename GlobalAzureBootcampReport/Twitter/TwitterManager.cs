@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using GlobalAzureBootcampReport.Azure;
+using GlobalAzureBootcampReport.Redis;
 using Tweetinvi;
 using Tweetinvi.Core.Interfaces.Streaminvi;
 
@@ -11,11 +12,13 @@ namespace GlobalAzureBootcampReport.Twitter
     internal class TwitterManager : ITwitterManager
     {
         private readonly ITweetsRepository _repository;
+        private readonly ICache _cache;
         private IFilteredStream _stream;
 
         public TwitterManager(ITweetsRepository repository)
         {
             _repository = repository;
+            _cache = new Cache();
         }
 
         public void StartListening()
@@ -34,7 +37,6 @@ namespace GlobalAzureBootcampReport.Twitter
                 });
             };
             Task.Factory.StartNew(_stream.StartStreamMatchingAllConditions);
-            
         }
 
         public void StopListening()
@@ -45,5 +47,10 @@ namespace GlobalAzureBootcampReport.Twitter
             }
         }
 
+        public async Task CalculateStats()
+        {
+            var usersStats = _repository.GetUserStats();
+            await _cache.SetItemAsync(_cache.UsersStatsKey, usersStats);
+        }
     }
 }

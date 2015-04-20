@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GlobalAzureBootcampReport.Models;
 using Microsoft.WindowsAzure.Storage.Table;
+using Tweetinvi.Core.Extensions;
 
 namespace GlobalAzureBootcampReport.Azure
 {
@@ -19,13 +20,14 @@ namespace GlobalAzureBootcampReport.Azure
             _table = AzureHelper.GetTableReference(TableName);
         }
 
-        public IEnumerable<UserStat> GetTopUserStats(int topUsers)
+        public IEnumerable<UserStat> GetUserStats()
         {
-            var query = new TableQuery<Tweet>();
-            return
-                _table.ExecuteQuery(query).GroupBy(t => t.User, (key, g) => new UserStat { Name = key, TweetsNumber = g.Count() })
-                    .OrderByDescending(g => g.TweetsNumber)
-                    .Take(topUsers);
+            var tableQuery = _table.ExecuteQuery(new TableQuery<Tweet>()).ToList();
+            var query = tableQuery
+                .GroupBy(t => t.PartitionKey, (key, g) => new UserStat {UserId = key, TweetsNumber = g.Count()})
+                .OrderByDescending(g => g.TweetsNumber);
+            query.ForEach(us => us.Name = tableQuery.First(t => t.PartitionKey == us.UserId).User);
+            return query;
         }
 
         public IEnumerable<Tweet> GetLatestTweets()
