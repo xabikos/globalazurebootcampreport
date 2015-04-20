@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using GlobalAzureBootcampReport.Models;
 using Microsoft.WindowsAzure.Storage.Table;
 
@@ -27,6 +27,15 @@ namespace GlobalAzureBootcampReport.Azure
                 tweets.GroupBy(t => t.User, (key, g) => new UserStat {Name = key, TweetsNumber = g.Count()})
                     .OrderBy(g => g.TweetsNumber)
                     .Take(topUsers);
+        }
+
+        public IEnumerable<Tweet> GetLatestTweets()
+        {
+            var oneHourAgoTimestap = new DateTimeOffset(DateTime.UtcNow.AddMinutes(-60));
+            var query =
+                new TableQuery<Tweet>().Where(TableQuery.GenerateFilterConditionForDate("Timestamp",
+                    QueryComparisons.GreaterThan, oneHourAgoTimestap));
+            return _table.ExecuteQuery(query);
         }
         
         public void SaveTweet(Tweet tweet)

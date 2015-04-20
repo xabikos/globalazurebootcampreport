@@ -14,6 +14,8 @@ namespace GlobalAzureBootcampReport.Azure
         /// </summary>
         IEnumerable<UserStat> GetTopUserStats(int topUsers);
 
+        IEnumerable<Tweet> GetLatestTweets();
+
         /// <summary>
         /// Stores asynchronously the supplied <paramref name="tweet"/>
         /// </summary>

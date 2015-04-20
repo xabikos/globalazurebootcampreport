@@ -90,21 +90,27 @@
 	
 	var NavigationBar = __webpack_require__(8);
 	var UsersStatsList = __webpack_require__(9);
-	var SecurityController = __webpack_require__(10);
+	var TweetsList = __webpack_require__(10);
+	var SecurityController = __webpack_require__(11);
 	
 	var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____Class0.hasOwnProperty(____Class0____Key)){App[____Class0____Key]=____Class0[____Class0____Key];}}var ____SuperProtoOf____Class0=____Class0===null?null:____Class0.prototype;App.prototype=Object.create(____SuperProtoOf____Class0);App.prototype.constructor=App;App.__superConstructor__=____Class0;function App(){"use strict";if(____Class0!==null){____Class0.apply(this,arguments);}}
 	  Object.defineProperty(App.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
+		var Grid = ReactBootstrap.Grid;
+		var Row = ReactBootstrap.Row;
+		var Col = ReactBootstrap.Col;
+		
 		return (
 			React.createElement("div", null, 
 				React.createElement(NavigationBar, null), 
-				React.createElement(ReactBootstrap.Grid, {fluid: false}, 
-					React.createElement(ReactBootstrap.Row, null, 
-						React.createElement(ReactBootstrap.Col, {xs: 12, md: 3}, 
+				React.createElement(Grid, {fluid: false}, 
+					React.createElement(Row, null, 
+						React.createElement(Col, {xs: 12, md: 3}, 
 							React.createElement(UsersStatsList, {usersStats: this.props.initialStats})
 						), 
-						React.createElement(ReactBootstrap.Col, {xs: 12, md: 6}
+						React.createElement(Col, {xs: 12, md: 6}, 
+							React.createElement(TweetsList, {tweets: this.props.initialTweets})
 						), 
-						React.createElement(ReactBootstrap.Col, {xs: 12, md: 3}, 
+						React.createElement(Col, {xs: 12, md: 3}, 
 							React.createElement(SecurityController, {isAuthenticated: this.props.isAuthenticated, user: this.props.user})
 						)
 					)
@@ -205,12 +211,55 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(6);
+	var ReactBootstrap = __webpack_require__(7);
 	
-	var LoginForm = __webpack_require__(11);
-	var RegistrationForm = __webpack_require__(12);
-	var UserInfo = __webpack_require__(13);
+	var tweets = __webpack_require__(16);
 	
-	var security = __webpack_require__(14);
+	var TweetsList = React.createClass({displayName: "TweetsList",
+		
+		getInitialState:function(){
+			return {tweets: this.props.tweets};
+		},
+	
+		componentDidMount:function(){
+			tweets.addChangeListener(this.onChange);
+		},
+	
+		render:function() {
+			var tweets = this.state.tweets.map(function(tweet) 
+				{return React.createElement("li", null, 
+					"Text: ", tweet.Text
+				);}
+			);
+			return (		
+				React.createElement("div", null, 
+					React.createElement("ul", null, 
+						tweets
+					)
+				)
+			);
+		},
+	
+		onChange:function(newTweets){
+			var existingTweets = this.state.tweets;
+			var newTweets = existingTweets.unshift(newTweets);
+			this.setState({tweets: newTweets});
+		}
+	});
+	
+	module.exports = TweetsList;
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(6);
+	
+	var LoginForm = __webpack_require__(12);
+	var RegistrationForm = __webpack_require__(13);
+	var UserInfo = __webpack_require__(14);
+	
+	var security = __webpack_require__(15);
 	
 	var SecurityController = React.createClass({displayName: "SecurityController",
 		
@@ -244,13 +293,13 @@
 	module.exports = SecurityController;
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(6);
 	var ReactBootstrap = __webpack_require__(7);
 	
-	var security = __webpack_require__(14);
+	var security = __webpack_require__(15);
 	
 	var LogIn = React.createClass({displayName: "LogIn",
 		
@@ -298,13 +347,13 @@
 	module.exports = LogIn;
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(6);
 	var ReactBootstrap = __webpack_require__(7);
 	
-	var security = __webpack_require__(14);
+	var security = __webpack_require__(15);
 	
 	var RegistrationForm = React.createClass({displayName: "RegistrationForm",
 		
@@ -355,13 +404,13 @@
 	module.exports = RegistrationForm;
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(6);
 	var ReactBootstrap = __webpack_require__(7);
 	
-	var security = __webpack_require__(14);
+	var security = __webpack_require__(15);
 	
 	var UserInfo = React.createClass({displayName: "UserInfo",
 		
@@ -390,7 +439,7 @@
 	module.exports = UserInfo;
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var userAuthenticationCallback;
@@ -430,6 +479,24 @@
 	};
 	
 	module.exports = security;
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var newTweetsCallback;
+	
+	var tweets = {
+	    addChangeListener: function (callback) {
+	        newTweetsCallback = callback;
+	    },
+	
+	    updateUserStats: function (newTweets) {
+	        newTweetsCallback(newTweets);
+	    }
+	};
+	
+	module.exports = tweets;
 
 /***/ }
 /******/ ]);

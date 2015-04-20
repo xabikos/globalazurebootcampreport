@@ -29,6 +29,7 @@ namespace GlobalAzureBootcampReport.Controllers
         public ActionResult Index()
         {
             var stats = _tweetsRepository.GetTopUserStats(10);
+            var tweets = _tweetsRepository.GetLatestTweets();
             ApplicationUser user = null;
             if (User.Identity.IsAuthenticated)
             {
@@ -37,6 +38,7 @@ namespace GlobalAzureBootcampReport.Controllers
             return View(new IndexViewModel
             {
                 UsersStats = stats,
+                Tweets = tweets,
                 User = user
             });
         }

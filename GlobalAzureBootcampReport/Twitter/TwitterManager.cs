@@ -22,7 +22,7 @@ namespace GlobalAzureBootcampReport.Twitter
         {
 
             _stream = Stream.CreateFilteredStream();
-            _stream.AddTrack("#vouli");
+            _stream.AddTrack("#MOTAVATORMONDAY");
 
             _stream.MatchingTweetReceived += (sender, args) =>
             {
