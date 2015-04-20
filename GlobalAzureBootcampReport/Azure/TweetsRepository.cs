@@ -22,10 +22,9 @@ namespace GlobalAzureBootcampReport.Azure
         public IEnumerable<UserStat> GetTopUserStats(int topUsers)
         {
             var query = new TableQuery<Tweet>();
-            var tweets = _table.ExecuteQuery(query);
             return
-                tweets.GroupBy(t => t.User, (key, g) => new UserStat {Name = key, TweetsNumber = g.Count()})
-                    .OrderBy(g => g.TweetsNumber)
+                _table.ExecuteQuery(query).GroupBy(t => t.User, (key, g) => new UserStat { Name = key, TweetsNumber = g.Count() })
+                    .OrderByDescending(g => g.TweetsNumber)
                     .Take(topUsers);
         }
 
@@ -37,7 +36,7 @@ namespace GlobalAzureBootcampReport.Azure
                     QueryComparisons.GreaterThan, oneHourAgoTimestap));
             return _table.ExecuteQuery(query);
         }
-        
+
         public void SaveTweet(Tweet tweet)
         {
             var insertOperation = TableOperation.Insert(tweet);
