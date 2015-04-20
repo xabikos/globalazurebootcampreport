@@ -51,7 +51,7 @@ namespace GlobalAzureBootcampReport.Controllers
 
         public ActionResult DummyUpdate()
         {
-            var stats = _tweetsRepository.GetUserStats(10).Reverse();
+            var stats = _tweetsRepository.GetUserStats().Reverse();
             _context.Value.Clients.All.updateUsersStats(stats);
             return new EmptyResult();
         }
