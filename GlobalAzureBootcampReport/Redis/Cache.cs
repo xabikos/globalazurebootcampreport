@@ -24,9 +24,14 @@ namespace GlobalAzureBootcampReport.Redis
             }
         }
 
-        public string UsersStatsKey
+        public string TopUsersStatsKey
         {
-            get { return "UsersStatsKey"; }
+            get { return "TopUsersStatsKey"; }
+        }
+
+        public string AllUsersStatsKey
+        {
+            get { return "AllUsersStatsKey"; }
         }
 
         public async Task<T> GetItemAsync<T>(string key)

@@ -5,7 +5,8 @@ namespace GlobalAzureBootcampReport.Redis
 {
     public interface ICache
     {
-        string UsersStatsKey { get; }
+        string TopUsersStatsKey { get; }
+        string AllUsersStatsKey { get; }
 
         /// <summary>
         /// Gets asynchronously the item with the supplied <paramref name="key"/> from the cache if exists.

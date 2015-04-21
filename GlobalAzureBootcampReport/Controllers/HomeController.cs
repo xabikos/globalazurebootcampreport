@@ -33,8 +33,8 @@ namespace GlobalAzureBootcampReport.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var stats = await _cache.GetItemAsync<IEnumerable<UserStat>>(_cache.UsersStatsKey);
-            stats = stats.OrderByDescending(us => us.TweetsNumber).Take(10);
+            var stats = await _cache.GetItemAsync<IEnumerable<UserStat>>(_cache.TopUsersStatsKey);
+            stats = stats.OrderByDescending(us => us.TweetsNumber).Take(20);
             var tweets = _tweetsRepository.GetLatestTweets();
             ApplicationUser user = null;
             if (User.Identity.IsAuthenticated)

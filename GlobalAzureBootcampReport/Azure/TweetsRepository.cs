@@ -25,7 +25,7 @@ namespace GlobalAzureBootcampReport.Azure
             var tableQuery = _table.ExecuteQuery(new TableQuery<Tweet>()).ToList();
             var query = tableQuery
                 .GroupBy(t => t.PartitionKey, (key, g) => new UserStat {UserId = key, TweetsNumber = g.Count()})
-                .OrderByDescending(g => g.TweetsNumber);
+                .OrderByDescending(g => g.TweetsNumber).ToList();
             query.ForEach(us => us.Name = tableQuery.First(t => t.PartitionKey == us.UserId).User);
             return query;
         }

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GlobalAzureBootcampReport.Azure;
 using GlobalAzureBootcampReport.Hubs;
+using GlobalAzureBootcampReport.Models;
 using GlobalAzureBootcampReport.Redis;
 using Microsoft.AspNet.SignalR;
 using Tweetinvi;
@@ -19,7 +21,7 @@ namespace GlobalAzureBootcampReport.Twitter
             new Lazy<IHubContext>(() => GlobalHost.ConnectionManager.GetHubContext<BootcampReportHub>());
 
         private const int BatchSize = 5;
-        private int _counter = 0;
+        private int _tweetsCounter, _topUsersCounter;
         private readonly List<Models.Tweet> _tweetsCache = new List<Models.Tweet>(); 
 
         private readonly ITweetsRepository _repository;
@@ -38,7 +40,7 @@ namespace GlobalAzureBootcampReport.Twitter
             if (_stream == null)
             {
                 _stream = Stream.CreateFilteredStream();
-                _stream.AddTrack("#SheBadOnRadio");
+                _stream.AddTrack("#GlobalAzure");
 
                 _stream.MatchingTweetReceived += (sender, args) =>
                 {
@@ -50,6 +52,7 @@ namespace GlobalAzureBootcampReport.Twitter
                     };
                     _repository.SaveTweet(tweet);
                     UpdateStatisticsAndClients(tweet);
+                    UpdateTweetsAndClients(tweet);
                 };
                 Task.Factory.StartNew(_stream.StartStreamMatchingAllConditions);
             }
@@ -57,11 +60,51 @@ namespace GlobalAzureBootcampReport.Twitter
 
         private void UpdateStatisticsAndClients(Models.Tweet tweet)
         {
-            _counter++;
-            _tweetsCache.Add(tweet);
-            if (_counter == BatchSize)
+            
+            var allUsersStatistics = _cache.GetItemAsync<IList<UserStat>>(_cache.AllUsersStatsKey).Result;
+            var userStats = allUsersStatistics.FirstOrDefault(us => us.UserId == tweet.UserId);
+            // First tweet of the user
+            if (userStats == null)
             {
-                _counter = 0;
+                allUsersStatistics.Add(new UserStat
+                {
+                    UserId = tweet.UserId,
+                    TweetsNumber = 1,
+                    Name = tweet.User,
+                    Country = tweet.Country
+                });
+            }
+            else
+            {
+                userStats.TweetsNumber++;
+            }
+            _cache.SetItemAsync(_cache.AllUsersStatsKey, allUsersStatistics).Wait();
+
+            var newTopUsersStatistics = allUsersStatistics.OrderByDescending(us => us.TweetsNumber).Take(20).ToList();
+
+            var topUsersStatistics = _cache.GetItemAsync<IList<UserStat>>(_cache.TopUsersStatsKey).Result;
+
+            if (topUsersStatistics.Count < 20 ||
+                topUsersStatistics.Intersect(newTopUsersStatistics, new UserStatComparer()).Any())
+            {
+                _topUsersCounter++;
+                _cache.SetItemAsync(_cache.TopUsersStatsKey, newTopUsersStatistics).Wait();
+            }
+
+            if (_topUsersCounter == BatchSize)
+            {
+                _topUsersCounter = 0;
+                _context.Value.Clients.All.updateUsersStats(newTopUsersStatistics);
+            }
+        }
+
+        private void UpdateTweetsAndClients(Models.Tweet tweet)
+        {
+            _tweetsCounter++;
+            _tweetsCache.Add(tweet);
+            if (_tweetsCounter == BatchSize)
+            {
+                _tweetsCounter = 0;
                 _context.Value.Clients.All.addTweetsToList(_tweetsCache);
                 _tweetsCache.Clear();
             }
@@ -78,7 +121,10 @@ namespace GlobalAzureBootcampReport.Twitter
         public async Task CalculateStats()
         {
             var usersStats = _repository.GetUserStats();
-            await _cache.SetItemAsync(_cache.UsersStatsKey, usersStats);
+            await _cache.SetItemAsync(_cache.AllUsersStatsKey, usersStats);
+            await
+                _cache.SetItemAsync(_cache.TopUsersStatsKey,
+                    usersStats.OrderByDescending(us => us.TweetsNumber).Take(20).ToList());
         }
     }
 }
