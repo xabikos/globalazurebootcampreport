@@ -274,9 +274,11 @@
 		},
 	
 		onChange:function(newTweets){
-			var existingTweets = this.state.tweets;
-			var newTweets = existingTweets.unshift(newTweets);
-			this.setState({tweets: newTweets});
+			var tweets = this.state.tweets;
+			newTweets.map(function(tweet)
+				{return tweets.unshift(tweet);}
+			);
+			this.setState({tweets: tweets});
 		}
 	});
 	

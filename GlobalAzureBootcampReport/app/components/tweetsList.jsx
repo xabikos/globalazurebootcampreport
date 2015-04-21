@@ -29,9 +29,11 @@ var TweetsList = React.createClass({
 	},
 
 	onChange(newTweets){
-		var existingTweets = this.state.tweets;
-		var newTweets = existingTweets.unshift(newTweets);
-		this.setState({tweets: newTweets});
+		var tweets = this.state.tweets;
+		newTweets.map(tweet=>
+			tweets.unshift(tweet)
+		);
+		this.setState({tweets: tweets});
 	}
 });
 

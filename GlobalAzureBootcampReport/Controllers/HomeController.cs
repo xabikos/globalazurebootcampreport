@@ -22,7 +22,7 @@ namespace GlobalAzureBootcampReport.Controllers
         private readonly ICache _cache;
 
         private readonly Lazy<IHubContext> _context =
-            new Lazy<IHubContext>(() => GlobalHost.ConnectionManager.GetHubContext<UsersStatsHub>());
+            new Lazy<IHubContext>(() => GlobalHost.ConnectionManager.GetHubContext<BootcampReportHub>());
 
         public HomeController(ITwitterManager twitterManager, ITweetsRepository tweetsRepository)
         {

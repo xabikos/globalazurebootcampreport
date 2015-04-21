@@ -6,7 +6,6 @@ using GlobalAzureBootcampReport.Hubs;
 using GlobalAzureBootcampReport.Redis;
 using Microsoft.AspNet.SignalR;
 using Tweetinvi;
-using Tweetinvi.Core.Interfaces;
 using Tweetinvi.Core.Interfaces.Streaminvi;
 
 namespace GlobalAzureBootcampReport.Twitter
@@ -16,8 +15,8 @@ namespace GlobalAzureBootcampReport.Twitter
     /// </summary>
     internal class TwitterManager : ITwitterManager
     {
-        //private readonly Lazy<IHubContext> _context =
-        //    new Lazy<IHubContext>(() => GlobalHost.ConnectionManager.GetHubContext<BootcampHub>());
+        private readonly Lazy<IHubContext> _context =
+            new Lazy<IHubContext>(() => GlobalHost.ConnectionManager.GetHubContext<BootcampReportHub>());
 
         private const int BatchSize = 5;
         private int _counter = 0;
@@ -35,22 +34,25 @@ namespace GlobalAzureBootcampReport.Twitter
 
         public void StartListening()
         {
-
-            _stream = Stream.CreateFilteredStream();
-            _stream.AddTrack("#SheBadOnRadio");
-
-            _stream.MatchingTweetReceived += (sender, args) =>
+            // create the stream only once
+            if (_stream == null)
             {
-                var tweet = new Models.Tweet(args.Tweet.Creator.IdStr, args.Tweet.Id.ToString())
+                _stream = Stream.CreateFilteredStream();
+                _stream.AddTrack("#SheBadOnRadio");
+
+                _stream.MatchingTweetReceived += (sender, args) =>
                 {
-                    User = args.Tweet.Creator.Name,
-                    Text = args.Tweet.Text,
-                    Country = args.Tweet.Place != null ? args.Tweet.Place.Country : string.Empty
+                    var tweet = new Models.Tweet(args.Tweet.Creator.IdStr, args.Tweet.Id.ToString())
+                    {
+                        User = args.Tweet.Creator.Name,
+                        Text = args.Tweet.Text,
+                        Country = args.Tweet.Place != null ? args.Tweet.Place.Country : string.Empty
+                    };
+                    _repository.SaveTweet(tweet);
+                    UpdateStatisticsAndClients(tweet);
                 };
-                _repository.SaveTweet(tweet);
-                UpdateStatisticsAndClients(tweet);
-            };
-            Task.Factory.StartNew(_stream.StartStreamMatchingAllConditions);
+                Task.Factory.StartNew(_stream.StartStreamMatchingAllConditions);
+            }
         }
 
         private void UpdateStatisticsAndClients(Models.Tweet tweet)
@@ -60,7 +62,7 @@ namespace GlobalAzureBootcampReport.Twitter
             if (_counter == BatchSize)
             {
                 _counter = 0;
-                //_context.Value.Clients.All.updateTweetsList(_tweetsCache);
+                _context.Value.Clients.All.addTweetsToList(_tweetsCache);
                 _tweetsCache.Clear();
             }
         }

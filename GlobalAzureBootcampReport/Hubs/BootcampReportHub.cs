@@ -5,11 +5,17 @@ using Microsoft.AspNet.SignalR;
 
 namespace GlobalAzureBootcampReport.Hubs
 {
-    public class UsersStatsHub : Hub
+    public class BootcampReportHub : Hub
     {
         public void UpdateUsersStats(IEnumerable<UserStat> usersStats)
         {
             Clients.All.updateUsersStats(usersStats);
+        }
+
+
+        public void AddTweetsToList(IEnumerable<Tweet> newTweets)
+        {
+            Clients.All.addTweetsToList(newTweets);
         }
     }
 }
