@@ -1,7 +1,12 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GlobalAzureBootcampReport.Azure;
+using GlobalAzureBootcampReport.Hubs;
 using GlobalAzureBootcampReport.Redis;
+using Microsoft.AspNet.SignalR;
 using Tweetinvi;
+using Tweetinvi.Core.Interfaces;
 using Tweetinvi.Core.Interfaces.Streaminvi;
 
 namespace GlobalAzureBootcampReport.Twitter
@@ -11,6 +16,13 @@ namespace GlobalAzureBootcampReport.Twitter
     /// </summary>
     internal class TwitterManager : ITwitterManager
     {
+        //private readonly Lazy<IHubContext> _context =
+        //    new Lazy<IHubContext>(() => GlobalHost.ConnectionManager.GetHubContext<BootcampHub>());
+
+        private const int BatchSize = 5;
+        private int _counter = 0;
+        private readonly List<Models.Tweet> _tweetsCache = new List<Models.Tweet>(); 
+
         private readonly ITweetsRepository _repository;
         private readonly ICache _cache;
         private IFilteredStream _stream;
@@ -25,18 +37,32 @@ namespace GlobalAzureBootcampReport.Twitter
         {
 
             _stream = Stream.CreateFilteredStream();
-            _stream.AddTrack("#MOTAVATORMONDAY");
+            _stream.AddTrack("#SheBadOnRadio");
 
             _stream.MatchingTweetReceived += (sender, args) =>
             {
-                _repository.SaveTweet(new Models.Tweet(args.Tweet.Creator.IdStr, args.Tweet.Id.ToString())
+                var tweet = new Models.Tweet(args.Tweet.Creator.IdStr, args.Tweet.Id.ToString())
                 {
                     User = args.Tweet.Creator.Name,
                     Text = args.Tweet.Text,
                     Country = args.Tweet.Place != null ? args.Tweet.Place.Country : string.Empty
-                });
+                };
+                _repository.SaveTweet(tweet);
+                UpdateStatisticsAndClients(tweet);
             };
             Task.Factory.StartNew(_stream.StartStreamMatchingAllConditions);
+        }
+
+        private void UpdateStatisticsAndClients(Models.Tweet tweet)
+        {
+            _counter++;
+            _tweetsCache.Add(tweet);
+            if (_counter == BatchSize)
+            {
+                _counter = 0;
+                //_context.Value.Clients.All.updateTweetsList(_tweetsCache);
+                _tweetsCache.Clear();
+            }
         }
 
         public void StopListening()

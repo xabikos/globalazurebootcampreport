@@ -1,3 +1,4 @@
 ﻿// All JavaScript in here will be loaded client-side
 var Components = require('expose?Components!./index');
-var UsersStats = require('expose?UsersStats!../../app/usersStats')
+var UsersStats = require('expose?UsersStats!../../app/usersStats');
+var Tweets = require('expose?Tweets!../../app/tweets');

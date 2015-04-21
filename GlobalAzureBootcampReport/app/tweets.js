@@ -5,7 +5,7 @@ var tweets = {
         newTweetsCallback = callback;
     },
 
-    updateUserStats: function (newTweets) {
+    updateTweetsList: function (newTweets) {
         newTweetsCallback(newTweets);
     }
 };
