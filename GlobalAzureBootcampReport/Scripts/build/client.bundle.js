@@ -217,8 +217,15 @@
 		render:function() {
 			var stats = this.state.stats.map(function(userStat) 
 				{return React.createElement("li", null, 
-					"Name: ", userStat.Name, 
-					"Count: ", userStat.TweetsNumber
+					React.createElement("div", null, 
+						"Name: ", userStat.Name
+					), 
+					React.createElement("div", null, 
+						"Count: ", userStat.TweetsNumber
+					), 
+					React.createElement("div", null, 
+						React.createElement("img", {src: userStat.ImageUrl})
+					)				
 				);}
 			);
 			return (		

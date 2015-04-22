@@ -45,7 +45,7 @@ namespace GlobalAzureBootcampReport.Twitter
             if (_stream == null)
             {
                 _stream = Stream.CreateFilteredStream();
-                _stream.AddTrack("#onenyc");
+                _stream.AddTrack("#earthday");
 
                 _stream.MatchingTweetReceived += (sender, args) =>
                 {
@@ -95,7 +95,9 @@ namespace GlobalAzureBootcampReport.Twitter
                     UserId = tweet.UserId,
                     TweetsNumber = 1,
                     Name = tweet.User,
-                    Country = tweet.Country
+                    Country = tweet.Country,
+                    ImageUrl = string.Format("{0}/{1}/{2}",
+                        AzureHelper.CloudStorageAccount.BlobStorageUri.PrimaryUri, ImagesContainerName, tweet.UserId)
                 });
             }
             else

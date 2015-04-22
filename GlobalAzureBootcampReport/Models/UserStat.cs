@@ -9,6 +9,7 @@ namespace GlobalAzureBootcampReport.Models
         public string Name { get; set; }
         public int TweetsNumber { get; set; }
         public string Country { get; set; }
+        public string ImageUrl { get; set; }
     }
 
     public class UserStatComparer : IEqualityComparer<UserStat>

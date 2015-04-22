@@ -16,8 +16,15 @@ var UsersStatsList = React.createClass({
 	render() {
 		var stats = this.state.stats.map(userStat =>
 			<li>
-				Name: {userStat.Name}
-				Count: {userStat.TweetsNumber}
+				<div>
+					Name: {userStat.Name}
+				</div>
+				<div>
+					Count: {userStat.TweetsNumber}
+				</div>
+				<div>
+					<img src={userStat.ImageUrl} />
+				</div>				
 			</li>
 		);
 		return (		

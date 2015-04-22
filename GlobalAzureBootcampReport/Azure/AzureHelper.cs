@@ -10,7 +10,7 @@ namespace GlobalAzureBootcampReport.Azure
     {
         private static CloudStorageAccount _account;
 
-        private static CloudStorageAccount CloudStorageAccount
+        public static CloudStorageAccount CloudStorageAccount
         {
             get
             {

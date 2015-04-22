@@ -26,7 +26,12 @@ namespace GlobalAzureBootcampReport.Azure
             var query = tableQuery
                 .GroupBy(t => t.PartitionKey, (key, g) => new UserStat {UserId = key, TweetsNumber = g.Count()})
                 .OrderByDescending(g => g.TweetsNumber).ToList();
-            query.ForEach(us => us.Name = tableQuery.First(t => t.PartitionKey == us.UserId).User);
+            query.ForEach(us =>
+            {
+                us.Name = tableQuery.First(t => t.PartitionKey == us.UserId).User;
+                us.ImageUrl = string.Format("{0}/profileimages/{1}",
+                    AzureHelper.CloudStorageAccount.BlobStorageUri.PrimaryUri, us.UserId);
+            });
             return query;
         }
 
