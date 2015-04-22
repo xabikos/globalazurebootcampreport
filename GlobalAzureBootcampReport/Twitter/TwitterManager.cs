@@ -22,7 +22,7 @@ namespace GlobalAzureBootcampReport.Twitter
     {
         private const string ImagesContainerName = "profileimages";
 
-        private static string _storageAccountPrefix =
+        private static readonly string StorageAccountPrefix =
             AzureHelper.CloudStorageAccount.BlobStorageUri.PrimaryUri.ToString().TrimEnd(new[] {'/'});
 
         private readonly Lazy<IHubContext> _context =
@@ -55,6 +55,7 @@ namespace GlobalAzureBootcampReport.Twitter
                     var tweet = new Tweet(args.Tweet.Creator.IdStr, args.Tweet.Id.ToString())
                     {
                         User = args.Tweet.Creator.Name,
+                        ScreenName = args.Tweet.Creator.ScreenName,
                         Text = args.Tweet.Text,
                         Country = args.Tweet.Place != null ? args.Tweet.Place.Country : string.Empty
                     };
@@ -100,7 +101,7 @@ namespace GlobalAzureBootcampReport.Twitter
                     Name = tweet.User,
                     Country = tweet.Country,
                     ImageUrl = string.Format("{0}/{1}/{2}",
-                        _storageAccountPrefix, ImagesContainerName, tweet.UserId)
+                        StorageAccountPrefix, ImagesContainerName, tweet.UserId)
                 });
             }
             else
