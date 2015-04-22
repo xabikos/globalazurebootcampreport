@@ -9,6 +9,7 @@ using GlobalAzureBootcampReport.Hubs;
 using GlobalAzureBootcampReport.Models;
 using GlobalAzureBootcampReport.Redis;
 using Microsoft.AspNet.SignalR;
+using Tweetinvi.Core.Enum;
 using Tweetinvi.Core.Interfaces;
 using Tweetinvi.Core.Interfaces.Streaminvi;
 using Stream = Tweetinvi.Stream;
@@ -64,6 +65,9 @@ namespace GlobalAzureBootcampReport.Twitter
                     UpdateStatisticsAndClients(tweet);
                     UpdateTweetsAndClients(tweet);
                 };
+
+                //_stream.StreamStopped += (sender, args) => Task.Factory.StartNew(_stream.StartStreamMatchingAllConditions);
+
                 Task.Factory.StartNew(_stream.StartStreamMatchingAllConditions);
             }
         }
@@ -99,6 +103,7 @@ namespace GlobalAzureBootcampReport.Twitter
                     UserId = tweet.UserId,
                     TweetsNumber = 1,
                     Name = tweet.User,
+                    ProfileUrl = "https://www.twitter.com/" + tweet.ScreenName,
                     Country = tweet.Country,
                     ImageUrl = string.Format("{0}/{1}/{2}",
                         StorageAccountPrefix, ImagesContainerName, tweet.UserId)

@@ -210,7 +210,9 @@
 						"Count: ", userStat.TweetsNumber
 					), 
 					React.createElement("div", null, 
-						React.createElement("img", {src: userStat.ImageUrl})
+						React.createElement("a", {href: userStat.ProfileUrl}, 
+							React.createElement("img", {src: userStat.ImageUrl})
+						)
 					)				
 				);}
 			);

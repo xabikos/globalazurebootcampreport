@@ -28,7 +28,9 @@ namespace GlobalAzureBootcampReport.Azure
                 .OrderByDescending(g => g.TweetsNumber).ToList();
             query.ForEach(us =>
             {
-                us.Name = tableQuery.First(t => t.PartitionKey == us.UserId).User;
+                var tweet = tableQuery.First(t => t.PartitionKey == us.UserId);
+                us.Name = tweet.User;
+                us.ProfileUrl = "https://www.twitter.com/" + tweet.ScreenName;
                 us.ImageUrl = string.Format("{0}/profileimages/{1}",
                     AzureHelper.CloudStorageAccount.BlobStorageUri.PrimaryUri.ToString().TrimEnd(new[] {'/'}), us.UserId);
             });

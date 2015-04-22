@@ -7,6 +7,7 @@ namespace GlobalAzureBootcampReport.Models
     {
         public string UserId { get; set; }
         public string Name { get; set; }
+        public string ProfileUrl { get; set; }
         public int TweetsNumber { get; set; }
         public string Country { get; set; }
         public string ImageUrl { get; set; }

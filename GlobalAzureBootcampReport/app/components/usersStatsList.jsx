@@ -23,7 +23,9 @@ var UsersStatsList = React.createClass({
 					Count: {userStat.TweetsNumber}
 				</div>
 				<div>
-					<img src={userStat.ImageUrl} />
+					<a href={userStat.ProfileUrl}>
+						<img src={userStat.ImageUrl} />
+					</a>
 				</div>				
 			</li>
 		);
