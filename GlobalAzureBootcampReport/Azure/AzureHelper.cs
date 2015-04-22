@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.Table;
 
 namespace GlobalAzureBootcampReport.Azure
@@ -39,5 +40,18 @@ namespace GlobalAzureBootcampReport.Azure
             return tableReference;
         }
 
+        public static CloudBlobContainer GetContainerReference(string containerName)
+        {
+            var blobClient = CloudStorageAccount.CreateCloudBlobClient();
+            var container = blobClient.GetContainerReference(containerName);
+            container.CreateIfNotExists();
+            container.SetPermissions(
+                new BlobContainerPermissions
+                {
+                    PublicAccess =
+                        BlobContainerPublicAccessType.Blob
+                });
+            return container;
+        }
     }
 }

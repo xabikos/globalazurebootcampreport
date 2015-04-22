@@ -109,8 +109,8 @@
 	
 	var NavigationBar = __webpack_require__(10);
 	var UsersStatsList = __webpack_require__(11);
-	var TweetsList = __webpack_require__(13);
-	var SecurityController = __webpack_require__(12);
+	var TweetsList = __webpack_require__(12);
+	var SecurityController = __webpack_require__(13);
 	
 	var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____Class0.hasOwnProperty(____Class0____Key)){App[____Class0____Key]=____Class0[____Class0____Key];}}var ____SuperProtoOf____Class0=____Class0===null?null:____Class0.prototype;App.prototype=Object.create(____SuperProtoOf____Class0);App.prototype.constructor=App;App.__superConstructor__=____Class0;function App(){"use strict";if(____Class0!==null){____Class0.apply(this,arguments);}}
 	  Object.defineProperty(App.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
@@ -230,49 +230,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(8);
-	
-	var LoginForm = __webpack_require__(14);
-	var RegistrationForm = __webpack_require__(15);
-	var UserInfo = __webpack_require__(16);
-	
-	var security = __webpack_require__(17);
-	
-	var SecurityController = React.createClass({displayName: "SecurityController",
-		
-		getInitialState:function(){
-			return {
-				isAuthenticated : this.props.isAuthenticated,
-				user: this.props.user
-			};
-		},
-	
-		componentDidMount:function(){
-			security.addChangeListener(this.onChange);
-		},
-	
-		render:function() {
-			return (
-				this.state.isAuthenticated ? 
-					React.createElement(UserInfo, {user: this.state.user}) :
-					(React.createElement("div", null, 
-						React.createElement(LoginForm, null), 
-						React.createElement(RegistrationForm, null)
-					))
-			);
-		},
-	
-		onChange:function(status){
-			this.setState({isAuthenticated: status.isAuthenticated});
-		}
-	});
-	
-	module.exports = SecurityController;
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(8);
 	var ReactBootstrap = __webpack_require__(9);
 	
 	var tweets = __webpack_require__(6);
@@ -312,6 +269,49 @@
 	});
 	
 	module.exports = TweetsList;
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(8);
+	
+	var LoginForm = __webpack_require__(14);
+	var RegistrationForm = __webpack_require__(15);
+	var UserInfo = __webpack_require__(16);
+	
+	var security = __webpack_require__(17);
+	
+	var SecurityController = React.createClass({displayName: "SecurityController",
+		
+		getInitialState:function(){
+			return {
+				isAuthenticated : this.props.isAuthenticated,
+				user: this.props.user
+			};
+		},
+	
+		componentDidMount:function(){
+			security.addChangeListener(this.onChange);
+		},
+	
+		render:function() {
+			return (
+				this.state.isAuthenticated ? 
+					React.createElement(UserInfo, {user: this.state.user}) :
+					(React.createElement("div", null, 
+						React.createElement(LoginForm, null), 
+						React.createElement(RegistrationForm, null)
+					))
+			);
+		},
+	
+		onChange:function(status){
+			this.setState({isAuthenticated: status.isAuthenticated});
+		}
+	});
+	
+	module.exports = SecurityController;
 
 /***/ },
 /* 14 */

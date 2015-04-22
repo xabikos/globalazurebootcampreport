@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using GlobalAzureBootcampReport.Azure;
 using GlobalAzureBootcampReport.Hubs;
 using GlobalAzureBootcampReport.Models;
 using GlobalAzureBootcampReport.Redis;
 using Microsoft.AspNet.SignalR;
-using Tweetinvi;
+using Tweetinvi.Core.Interfaces;
 using Tweetinvi.Core.Interfaces.Streaminvi;
+using Stream = Tweetinvi.Stream;
 
 namespace GlobalAzureBootcampReport.Twitter
 {
@@ -17,6 +20,8 @@ namespace GlobalAzureBootcampReport.Twitter
     /// </summary>
     internal class TwitterManager : ITwitterManager
     {
+        private const string ImagesContainerName = "profileimages";
+
         private readonly Lazy<IHubContext> _context =
             new Lazy<IHubContext>(() => GlobalHost.ConnectionManager.GetHubContext<BootcampReportHub>());
 
@@ -40,7 +45,7 @@ namespace GlobalAzureBootcampReport.Twitter
             if (_stream == null)
             {
                 _stream = Stream.CreateFilteredStream();
-                _stream.AddTrack("#GlobalAzure");
+                _stream.AddTrack("#onenyc");
 
                 _stream.MatchingTweetReceived += (sender, args) =>
                 {
@@ -51,10 +56,29 @@ namespace GlobalAzureBootcampReport.Twitter
                         Country = args.Tweet.Place != null ? args.Tweet.Place.Country : string.Empty
                     };
                     _repository.SaveTweet(tweet);
+                    CheckForNewUserAndStoreImage(args.Tweet);
                     UpdateStatisticsAndClients(tweet);
                     UpdateTweetsAndClients(tweet);
                 };
                 Task.Factory.StartNew(_stream.StartStreamMatchingAllConditions);
+            }
+        }
+
+        private void CheckForNewUserAndStoreImage(ITweet tweet)
+        {
+            var user = tweet.Creator;
+            var allUsersStatistics = _cache.GetItemAsync<IList<UserStat>>(_cache.AllUsersStatsKey).Result;
+            // Check if a new user
+            if (allUsersStatistics.All(us => us.UserId != user.IdStr))
+            {
+                using (var client = new HttpClient())
+                {
+                    var profileImage = client.GetByteArrayAsync(user.ProfileImageUrl).Result;
+                    var container = AzureHelper.GetContainerReference(ImagesContainerName);
+                    var blob = container.GetBlockBlobReference(user.IdStr);
+                    using(var stream = new MemoryStream(profileImage))
+                    blob.UploadFromStream(stream);
+                }
             }
         }
 
