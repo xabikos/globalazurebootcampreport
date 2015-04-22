@@ -30,7 +30,7 @@ namespace GlobalAzureBootcampReport.Azure
             {
                 us.Name = tableQuery.First(t => t.PartitionKey == us.UserId).User;
                 us.ImageUrl = string.Format("{0}/profileimages/{1}",
-                    AzureHelper.CloudStorageAccount.BlobStorageUri.PrimaryUri, us.UserId);
+                    AzureHelper.CloudStorageAccount.BlobStorageUri.PrimaryUri.ToString().TrimEnd(new[] {'/'}), us.UserId);
             });
             return query;
         }

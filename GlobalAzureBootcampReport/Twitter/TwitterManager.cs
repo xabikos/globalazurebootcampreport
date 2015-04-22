@@ -22,12 +22,15 @@ namespace GlobalAzureBootcampReport.Twitter
     {
         private const string ImagesContainerName = "profileimages";
 
+        private static string _storageAccountPrefix =
+            AzureHelper.CloudStorageAccount.BlobStorageUri.PrimaryUri.ToString().TrimEnd(new[] {'/'});
+
         private readonly Lazy<IHubContext> _context =
             new Lazy<IHubContext>(() => GlobalHost.ConnectionManager.GetHubContext<BootcampReportHub>());
 
         private const int BatchSize = 5;
         private int _tweetsCounter, _topUsersCounter;
-        private readonly List<Models.Tweet> _tweetsCache = new List<Models.Tweet>(); 
+        private readonly List<Tweet> _tweetsCache = new List<Tweet>(); 
 
         private readonly ITweetsRepository _repository;
         private readonly ICache _cache;
@@ -49,7 +52,7 @@ namespace GlobalAzureBootcampReport.Twitter
 
                 _stream.MatchingTweetReceived += (sender, args) =>
                 {
-                    var tweet = new Models.Tweet(args.Tweet.Creator.IdStr, args.Tweet.Id.ToString())
+                    var tweet = new Tweet(args.Tweet.Creator.IdStr, args.Tweet.Id.ToString())
                     {
                         User = args.Tweet.Creator.Name,
                         Text = args.Tweet.Text,
@@ -82,7 +85,7 @@ namespace GlobalAzureBootcampReport.Twitter
             }
         }
 
-        private void UpdateStatisticsAndClients(Models.Tweet tweet)
+        private void UpdateStatisticsAndClients(Tweet tweet)
         {
             
             var allUsersStatistics = _cache.GetItemAsync<IList<UserStat>>(_cache.AllUsersStatsKey).Result;
@@ -97,7 +100,7 @@ namespace GlobalAzureBootcampReport.Twitter
                     Name = tweet.User,
                     Country = tweet.Country,
                     ImageUrl = string.Format("{0}/{1}/{2}",
-                        AzureHelper.CloudStorageAccount.BlobStorageUri.PrimaryUri, ImagesContainerName, tweet.UserId)
+                        _storageAccountPrefix, ImagesContainerName, tweet.UserId)
                 });
             }
             else
