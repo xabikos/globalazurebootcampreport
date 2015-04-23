@@ -15,9 +15,13 @@ var TweetsList = React.createClass({
 
 	render() {
 		var tweets = this.state.tweets.map(tweet => {
+			var userProfileUrl = "https://www.twitter.com/" + tweet.ScreenName;
 			var tweetUrl = "http://twitter.com/" + tweet.ScreenName +"/status/" + tweet.TweetId;
 			return(
 				<div className="tweetContainer">
+					<div className="tweetHeader">
+						User: <a href={userProfileUrl} target="_blank">{tweet.User}</a>
+					</div>
 					<div className="tweetBody">
 						Text: {tweet.Text}
 					</div>
