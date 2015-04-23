@@ -66,7 +66,7 @@ namespace GlobalAzureBootcampReport.Twitter
                     UpdateTweetsAndClients(tweet);
                 };
 
-                //_stream.StreamStopped += (sender, args) => Task.Factory.StartNew(_stream.StartStreamMatchingAllConditions);
+                _stream.StreamStopped += (sender, args) => Task.Factory.StartNew(_stream.StartStreamMatchingAllConditions);
 
                 Task.Factory.StartNew(_stream.StartStreamMatchingAllConditions);
             }
