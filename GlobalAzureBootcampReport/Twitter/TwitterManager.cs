@@ -92,13 +92,13 @@ namespace GlobalAzureBootcampReport.Twitter
 
         private void UpdateStatisticsAndClients(Tweet tweet)
         {
-            
             var allUsersStatistics = _cache.GetItemAsync<IList<UserStat>>(_cache.AllUsersStatsKey).Result;
+            
             var userStats = allUsersStatistics.FirstOrDefault(us => us.UserId == tweet.UserId);
             // First tweet of the user
             if (userStats == null)
             {
-                allUsersStatistics.Add(new UserStat
+                var userStat = new UserStat
                 {
                     UserId = tweet.UserId,
                     TweetsNumber = 1,
@@ -107,22 +107,43 @@ namespace GlobalAzureBootcampReport.Twitter
                     Country = tweet.Country,
                     ImageUrl = string.Format("{0}/{1}/{2}",
                         StorageAccountPrefix, ImagesContainerName, tweet.UserId)
-                });
+                };
+                allUsersStatistics.Add(userStat);
             }
             else
             {
                 userStats.TweetsNumber++;
             }
-            _cache.SetItemAsync(_cache.AllUsersStatsKey, allUsersStatistics).Wait();
-
-            var newTopUsersStatistics = allUsersStatistics.OrderByDescending(us => us.TweetsNumber).Take(15).ToList();
+            _cache.SetItemAsync(_cache.AllUsersStatsKey,
+                allUsersStatistics.Select(us => new {us.UserId, us.TweetsNumber})).Wait();
 
             var topUsersStatistics = _cache.GetItemAsync<IList<UserStat>>(_cache.TopUsersStatsKey).Result;
+
+            var newTopUsersStatistics = allUsersStatistics.OrderByDescending(us => us.TweetsNumber).Take(15).ToList();
 
             if (topUsersStatistics.Count < 15 ||
                 topUsersStatistics.Intersect(newTopUsersStatistics, new UserStatComparer()).Any())
             {
                 _topUsersCounter++;
+                foreach (var userStat in newTopUsersStatistics)
+                {
+                    var fullUserStat = topUsersStatistics.FirstOrDefault(us => us.UserId == userStat.UserId);
+                    if (fullUserStat != null)
+                    {
+                        userStat.Name = fullUserStat.Name;
+                        userStat.ProfileUrl = fullUserStat.ProfileUrl;
+                        userStat.Country = fullUserStat.Country;
+                        userStat.ImageUrl = fullUserStat.ImageUrl;
+                    }
+                    else
+                    {
+                        userStat.Name = tweet.User;
+                        userStat.ProfileUrl = "https://www.twitter.com/" + tweet.ScreenName;
+                        userStat.Country = tweet.Country;
+                        userStat.ImageUrl = string.Format("{0}/{1}/{2}",
+                            StorageAccountPrefix, ImagesContainerName, tweet.UserId);
+                    }
+                }
                 _cache.SetItemAsync(_cache.TopUsersStatsKey, newTopUsersStatistics).Wait();
             }
 
@@ -155,8 +176,10 @@ namespace GlobalAzureBootcampReport.Twitter
 
         public async Task CalculateStats()
         {
-            var usersStats = _repository.GetUserStats();
-            await _cache.SetItemAsync(_cache.AllUsersStatsKey, usersStats);
+            var usersStats = _repository.GetUserStats().ToList();
+            await
+                _cache.SetItemAsync(_cache.AllUsersStatsKey,
+                    usersStats.Select(us => new {us.UserId, us.TweetsNumber}).ToList());
             await
                 _cache.SetItemAsync(_cache.TopUsersStatsKey,
                     usersStats.OrderByDescending(us => us.TweetsNumber).Take(15).ToList());
