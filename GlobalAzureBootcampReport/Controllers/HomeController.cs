@@ -35,7 +35,7 @@ namespace GlobalAzureBootcampReport.Controllers
         {
             var stats = await _cache.GetItemAsync<IEnumerable<UserStat>>(_cache.TopUsersStatsKey);
             stats = stats.OrderByDescending(us => us.TweetsNumber).Take(20);
-            var tweets = _tweetsRepository.GetLatestTweets();
+            var tweets = _tweetsRepository.GetLatestTweets().OrderByDescending(t => t.CreatedAt).Take(250);
             ApplicationUser user = null;
             if (User.Identity.IsAuthenticated)
             {
