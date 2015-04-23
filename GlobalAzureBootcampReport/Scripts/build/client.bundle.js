@@ -207,19 +207,24 @@
 	var React = __webpack_require__(/*! react */ 8);
 	var ReactBootstrap = __webpack_require__(/*! reactBootstrap */ 9);
 	
-	var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____Class1.hasOwnProperty(____Class1____Key)){NavigationBar[____Class1____Key]=____Class1[____Class1____Key];}}var ____SuperProtoOf____Class1=____Class1===null?null:____Class1.prototype;NavigationBar.prototype=Object.create(____SuperProtoOf____Class1);NavigationBar.prototype.constructor=NavigationBar;NavigationBar.__superConstructor__=____Class1;function NavigationBar(){"use strict";if(____Class1!==null){____Class1.apply(this,arguments);}}
+	var ____Class6=React.Component;for(var ____Class6____Key in ____Class6){if(____Class6.hasOwnProperty(____Class6____Key)){NavigationBar[____Class6____Key]=____Class6[____Class6____Key];}}var ____SuperProtoOf____Class6=____Class6===null?null:____Class6.prototype;NavigationBar.prototype=Object.create(____SuperProtoOf____Class6);NavigationBar.prototype.constructor=NavigationBar;NavigationBar.__superConstructor__=____Class6;function NavigationBar(){"use strict";if(____Class6!==null){____Class6.apply(this,arguments);}}
 		Object.defineProperty(NavigationBar.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 			var navBarHeader = (
 				React.createElement("a", {href: "/"}, 
 					React.createElement("img", {src: "/Content/images/2015-logo-inverted-small.png", alt: "Global Azure Bootcamp 2015"})
 				)	
 			);
-			return ( 
-				React.createElement(ReactBootstrap.Navbar, {fixedTop: true, brand: navBarHeader}, 
+			var Navbar = ReactBootstrap.Navbar;
+			var NavItem = ReactBootstrap.NavItem;
+	
+			return (			
+				React.createElement(Navbar, {fixedTop: true, brand: navBarHeader}, 
 					React.createElement(ReactBootstrap.Nav, {navbar: true, right: true}, 
-						React.createElement(ReactBootstrap.NavItem, {href: "https://github.com/xabikos/globalazurebootcampreport", target: "_blank"}, "Created by xabikos"), 
-						React.createElement(ReactBootstrap.NavItem, {href: "http://azure.microsoft.com/en-us/", target: "_blank"}, "Hosted by Microsoft Azure"), 
-						React.createElement(ReactBootstrap.NavItem, {href: "https://facebook.github.io/react/", target: "_blank"}, "Powered by Reactjs")
+						React.createElement(NavItem, {href: "http://xabikos.com", target: "_blank"}, "Created by xabikos"), 
+						React.createElement(NavItem, {href: "http://azure.microsoft.com/en-us/", target: "_blank"}, "Hosted by Microsoft Azure"), 
+						React.createElement(NavItem, {href: "https://facebook.github.io/react/", target: "_blank"}, "Powered by Reactjs"), 
+						React.createElement(NavItem, {href: "http://reactjs.net/", target: "_blank"}, "and Reactjs .NET"), 
+						React.createElement(NavItem, {href: "https://github.com/xabikos/globalazurebootcampreport", target: "_blank"}, "Github")
 					)
 				)
 			);

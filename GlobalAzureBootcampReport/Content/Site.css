@@ -16,3 +16,10 @@ a.navbar-brand img {
     margin-bottom: 5px;
 }
 
+.navbar {
+    background-color: #01a0ee
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white
+}
