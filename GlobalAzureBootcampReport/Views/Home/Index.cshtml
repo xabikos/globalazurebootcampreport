@@ -30,14 +30,11 @@
             var chat = $.connection.bootcampReportHub;
             // Create a function that the hub can call back to update stats.
             chat.client.updateUsersStats = function (usersStats) {
-                console.log('Users stats:' + usersStats);
                 UsersStats.updateUserStats(usersStats);
             };
             chat.client.addTweetsToList = function (newTweets) {
-                console.log('new tweets:' + newTweets);
                 Tweets.updateTweetsList(newTweets);
             };
-
             $.connection.hub.start().done(function () {
             });
         });
