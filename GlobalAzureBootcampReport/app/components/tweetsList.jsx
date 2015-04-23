@@ -14,17 +14,28 @@ var TweetsList = React.createClass({
 	},
 
 	render() {
-		var tweets = this.state.tweets.map(tweet =>
-			<li>
-				Text: {tweet.Text}
-			</li>
-		);
+		var tweets = this.state.tweets.map(tweet => {
+			var tweetUrl = "http://twitter.com/" + tweet.ScreenName +"/status/" + tweet.TweetId;
+			return(
+				<div className="tweetContainer">
+					<div className="tweetBody">
+						Text: {tweet.Text}
+					</div>
+					<div className="tweetFooter">
+						<a href={tweetUrl} target="_blank">
+							View original 
+						</a>
+						<span>
+							Created at: {tweet.CreatedAt}
+						</span>
+					</div>
+				</div>				
+			)
+		});
 		return (		
-			<div>
-				<ul>
-					{tweets}
-				</ul>
-			</div>
+			<ReactBootstrap.Panel header='GlobalAzure timeline' bsStyle='success'>
+				{tweets}				
+			</ReactBootstrap.Panel>
 		);
 	},
 

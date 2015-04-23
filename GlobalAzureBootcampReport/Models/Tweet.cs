@@ -24,5 +24,6 @@ namespace GlobalAzureBootcampReport.Models
 
         public string Country { get; set; }
 
+        public string CreatedAt { get { return Timestamp.DateTime.ToString("f"); } }
     }
 }

@@ -133,7 +133,7 @@ namespace GlobalAzureBootcampReport.Twitter
             }
         }
 
-        private void UpdateTweetsAndClients(Models.Tweet tweet)
+        private void UpdateTweetsAndClients(Tweet tweet)
         {
             _tweetsCounter++;
             _tweetsCache.Add(tweet);

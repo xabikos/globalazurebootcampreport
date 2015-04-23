@@ -23,15 +23,15 @@ var UsersStatsList = React.createClass({
 					Count: {userStat.TweetsNumber}
 				</div>
 				<div>
-					<a href={userStat.ProfileUrl}>
+					<a href={userStat.ProfileUrl} target="_blank">
 						<img src={userStat.ImageUrl} />
 					</a>
 				</div>				
 			</li>
 		);
+
 		return (		
-			<ReactBootstrap.Panel header='Users Statistcis' bsStyle='info'>
-				<h1>Users Stats</h1>
+			<ReactBootstrap.Panel header='Users Statistcis' bsStyle='info'>				
 				<ol>
 					{stats}
 				</ol>

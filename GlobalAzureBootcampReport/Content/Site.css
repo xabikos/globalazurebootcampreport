@@ -6,3 +6,8 @@ a.navbar-brand img {
     max-width: 100px;
     margin-top: -18px;
 }
+
+.tweetContainer {
+    border: black solid 1px;
+    margin-bottom: 5px;
+}

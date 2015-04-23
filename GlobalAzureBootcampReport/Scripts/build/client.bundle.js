@@ -224,15 +224,15 @@
 						"Count: ", userStat.TweetsNumber
 					), 
 					React.createElement("div", null, 
-						React.createElement("a", {href: userStat.ProfileUrl}, 
+						React.createElement("a", {href: userStat.ProfileUrl, target: "_blank"}, 
 							React.createElement("img", {src: userStat.ImageUrl})
 						)
 					)				
 				);}
 			);
+	
 			return (		
-				React.createElement(ReactBootstrap.Panel, {header: "Users Statistcis", bsStyle: "info"}, 
-					React.createElement("h1", null, "Users Stats"), 
+				React.createElement(ReactBootstrap.Panel, {header: "Users Statistcis", bsStyle: "info"}, 				
 					React.createElement("ol", null, 
 						stats
 					)
@@ -268,16 +268,27 @@
 		},
 	
 		render:function() {
-			var tweets = this.state.tweets.map(function(tweet) 
-				{return React.createElement("li", null, 
-					"Text: ", tweet.Text
-				);}
-			);
+			var tweets = this.state.tweets.map(function(tweet)  {
+				var tweetUrl = "http://twitter.com/" + tweet.ScreenName +"/status/" + tweet.TweetId;
+				return(
+					React.createElement("div", {className: "tweetContainer"}, 
+						React.createElement("div", {className: "tweetBody"}, 
+							"Text: ", tweet.Text
+						), 
+						React.createElement("div", {className: "tweetFooter"}, 
+							React.createElement("a", {href: tweetUrl, target: "_blank"}, 
+								"View original" 
+							), 
+							React.createElement("span", null, 
+								"Created at: ", tweet.CreatedAt
+							)
+						)
+					)				
+				)
+			});
 			return (		
-				React.createElement("div", null, 
-					React.createElement("ul", null, 
-						tweets
-					)
+				React.createElement(ReactBootstrap.Panel, {header: "GlobalAzure timeline", bsStyle: "success"}, 
+					tweets				
 				)
 			);
 		},
