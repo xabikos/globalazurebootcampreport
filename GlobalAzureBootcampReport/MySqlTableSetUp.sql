@@ -4,7 +4,7 @@
 -- Table structure for table `aspnetroles`
 --
 
-CREATE TABLE IF NOT EXISTS `aspnetroles` (
+CREATE TABLE IF NOT EXISTS `AspNetRoles` (
   `Id` varchar(128) NOT NULL,
   `Name` varchar(256) NOT NULL,
   PRIMARY KEY (`Id`)
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `aspnetroles` (
 -- Table structure for table `aspnetuserclaims`
 --
 
-CREATE TABLE IF NOT EXISTS `aspnetuserclaims` (
+CREATE TABLE IF NOT EXISTS `AspNetUserClaims` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `UserId` varchar(128) NOT NULL,
   `ClaimType` longtext,
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `aspnetuserclaims` (
 -- Table structure for table `aspnetuserlogins`
 --
 
-CREATE TABLE IF NOT EXISTS `aspnetuserlogins` (
+CREATE TABLE IF NOT EXISTS `AspNetUserLogins` (
   `LoginProvider` varchar(128) NOT NULL,
   `ProviderKey` varchar(128) NOT NULL,
   `UserId` varchar(128) NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `aspnetuserlogins` (
 -- Table structure for table `aspnetuserroles`
 --
 
-CREATE TABLE IF NOT EXISTS `aspnetuserroles` (
+CREATE TABLE IF NOT EXISTS `AspNetUserRoles` (
   `UserId` varchar(128) NOT NULL,
   `RoleId` varchar(128) NOT NULL,
   PRIMARY KEY (`UserId`,`RoleId`),
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `aspnetuserroles` (
 -- Table structure for table `aspnetusers`
 --
 
-CREATE TABLE IF NOT EXISTS `aspnetusers` (
+CREATE TABLE IF NOT EXISTS `AspNetUsers` (
   `Id` varchar(128) NOT NULL,
   `Email` varchar(256) DEFAULT NULL,
   `EmailConfirmed` tinyint(1) NOT NULL,
@@ -82,19 +82,19 @@ CREATE TABLE IF NOT EXISTS `aspnetusers` (
 --
 -- Constraints for table `aspnetuserclaims`
 --
-ALTER TABLE `aspnetuserclaims`
-  ADD CONSTRAINT `ApplicationUser_Claims` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE `AspNetUserClaims`
+  ADD CONSTRAINT `ApplicationUser_Claims` FOREIGN KEY (`UserId`) REFERENCES `AspNetUsers` (`Id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `aspnetuserlogins`
 --
-ALTER TABLE `aspnetuserlogins`
-  ADD CONSTRAINT `ApplicationUser_Logins` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE `AspNetUserLogins`
+  ADD CONSTRAINT `ApplicationUser_Logins` FOREIGN KEY (`UserId`) REFERENCES `AspNetUsers` (`Id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `aspnetuserroles`
 --
-ALTER TABLE `aspnetuserroles`
-  ADD CONSTRAINT `ApplicationUser_Roles` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `IdentityRole_Users` FOREIGN KEY (`RoleId`) REFERENCES `aspnetroles` (`Id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE `AspNetUserRoles`
+  ADD CONSTRAINT `ApplicationUser_Roles` FOREIGN KEY (`UserId`) REFERENCES `AspNetUsers` (`Id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `IdentityRole_Users` FOREIGN KEY (`RoleId`) REFERENCES `AspNetRoles` (`Id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
