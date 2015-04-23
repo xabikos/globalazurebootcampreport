@@ -115,11 +115,11 @@ namespace GlobalAzureBootcampReport.Twitter
             }
             _cache.SetItemAsync(_cache.AllUsersStatsKey, allUsersStatistics).Wait();
 
-            var newTopUsersStatistics = allUsersStatistics.OrderByDescending(us => us.TweetsNumber).Take(20).ToList();
+            var newTopUsersStatistics = allUsersStatistics.OrderByDescending(us => us.TweetsNumber).Take(15).ToList();
 
             var topUsersStatistics = _cache.GetItemAsync<IList<UserStat>>(_cache.TopUsersStatsKey).Result;
 
-            if (topUsersStatistics.Count < 20 ||
+            if (topUsersStatistics.Count < 15 ||
                 topUsersStatistics.Intersect(newTopUsersStatistics, new UserStatComparer()).Any())
             {
                 _topUsersCounter++;
@@ -159,7 +159,7 @@ namespace GlobalAzureBootcampReport.Twitter
             await _cache.SetItemAsync(_cache.AllUsersStatsKey, usersStats);
             await
                 _cache.SetItemAsync(_cache.TopUsersStatsKey,
-                    usersStats.OrderByDescending(us => us.TweetsNumber).Take(20).ToList());
+                    usersStats.OrderByDescending(us => us.TweetsNumber).Take(15).ToList());
         }
     }
 }
