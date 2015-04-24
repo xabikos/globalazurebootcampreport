@@ -3,6 +3,7 @@
 var LoginForm = require('./LoginForm');
 var RegistrationForm = require('./RegistrationForm');
 var UserInfo = require('./UserInfo');
+var Footer = require('./Footer');
 
 var security = require('../security');
 
@@ -22,10 +23,14 @@ var SecurityController = React.createClass({
 	render() {
 		return (
 			this.state.isAuthenticated ? 
-				<UserInfo user={this.state.user} /> :
+				(<div>
+					<UserInfo user={this.state.user} />
+					<Footer />
+				</div>) :
 				(<div>
 					<LoginForm />
 					<RegistrationForm />
+					<Footer />
 				</div>)
 		);
 	},
@@ -34,5 +39,5 @@ var SecurityController = React.createClass({
 		this.setState({isAuthenticated: status.isAuthenticated});
 	}
 });
-
+ 
 module.exports = SecurityController;

@@ -49,7 +49,7 @@ namespace GlobalAzureBootcampReport.Twitter
             if (_stream == null)
             {
                 _stream = Stream.CreateFilteredStream();
-                _stream.AddTrack("#WorldBookDay");
+                _stream.AddTrack("#obama");
 
                 _stream.MatchingTweetReceived += (sender, args) =>
                 {

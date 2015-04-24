@@ -14,10 +14,7 @@ class NavigationBar extends React.Component {
 		return (			
 			<Navbar fixedTop={true} brand={navBarHeader}>
 				<ReactBootstrap.Nav navbar right>
-					<NavItem href='http://xabikos.com' target='_blank'>Created by xabikos</NavItem>
-					<NavItem href='http://azure.microsoft.com/en-us/' target='_blank'>Hosted by Microsoft Azure</NavItem>
-					<NavItem href='https://facebook.github.io/react/' target='_blank'>Powered by Reactjs</NavItem>
-					<NavItem href='http://reactjs.net/' target='_blank'>and Reactjs .NET</NavItem>
+					<NavItem href='http://skg.azurebootcamp.net/' target='_blank'>Azure Bootcamp</NavItem>
 					<NavItem href='https://github.com/xabikos/globalazurebootcampreport' target='_blank'>Github</NavItem>
 				</ReactBootstrap.Nav>
 			</Navbar>

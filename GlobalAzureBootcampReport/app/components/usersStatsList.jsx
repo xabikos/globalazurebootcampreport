@@ -16,25 +16,23 @@ var UsersStatsList = React.createClass({
 	render() {
 		var stats = this.state.stats.map(userStat =>
 			<li>
-				<div>
-					Name: {userStat.Name}
-				</div>
-				<div>
-					Count: {userStat.TweetsNumber}
-				</div>
-				<div>
+				<div className="userImage">
 					<a href={userStat.ProfileUrl} target="_blank">
 						<img src={userStat.ImageUrl} />
 					</a>
-				</div>				
+				</div>
+				<div className="userInfo">
+					<div className="userName"><a href={userStat.ProfileUrl} target="_blank">@{userStat.Name}</a></div>
+					<div className="userCounter">{userStat.TweetsNumber} tweets</div>
+				</div>
 			</li>
 		);
 
 		return (		
-			<ReactBootstrap.Panel header='Users Statistcis' bsStyle='info'>				
-				<ol>
+			<ReactBootstrap.Panel className="userStats" header='Users Statistcis' bsStyle='info'>				
+				<ul>
 					{stats}
-				</ol>
+				</ul>
 			</ReactBootstrap.Panel>
 		);
 	},

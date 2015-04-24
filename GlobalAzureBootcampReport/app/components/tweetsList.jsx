@@ -19,20 +19,20 @@ var TweetsList = React.createClass({
 			var tweetUrl = "http://twitter.com/" + tweet.ScreenName +"/status/" + tweet.TweetId;
 			return(
 				<div className="tweetContainer">
-					<div className="tweetHeader">
-						User: <a href={userProfileUrl} target="_blank">{tweet.User}</a>
+				<div className="tweetHeader">
+						<a href={userProfileUrl} target="_blank">@{tweet.User}</a>
 					</div>
-					<div className="tweetBody">
-						Text: {tweet.Text}
-					</div>
+					<div className="tweetBody">{tweet.Text}</div>
+					
 					<div className="tweetFooter">
 						<a href={tweetUrl} target="_blank">
-							View original 
+							View
 						</a>
 						<span>
-							Created at: {tweet.CreatedAt}
+							{tweet.CreatedAt}
 						</span>
 					</div>
+					<hr/>
 				</div>				
 			)
 		});
