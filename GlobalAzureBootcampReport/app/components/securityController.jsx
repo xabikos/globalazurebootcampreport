@@ -36,7 +36,10 @@ var SecurityController = React.createClass({
 	},
 
 	onChange(status){
-		this.setState({isAuthenticated: status.isAuthenticated});
+		this.setState({
+			isAuthenticated: status.isAuthenticated,
+			user: status.user
+		});
 	}
 });
  
