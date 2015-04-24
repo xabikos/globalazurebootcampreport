@@ -375,6 +375,7 @@
     <Content Include="app\components\userInfo.jsx" />
     <Content Include="app\components\loginForm.jsx" />
     <Content Include="app\components\tweetsList.jsx" />
+    <Content Include="app\components\footer.jsx" />
     <None Include="ClearScript.V8\ClearScriptV8-32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -426,6 +427,7 @@
     <Content Include="app\components\app.jsx" />
     <Content Include="app\components\navigationBar.jsx" />
     <Content Include="package.json" />
+    <Content Include="PrivateSettings.config" />
     <None Include="Properties\PublishProfiles\GlobalAzureBootcampReport.pubxml" />
     <Content Include="Scripts\build\client.bundle.js.map" />
     <Content Include="Scripts\build\server.bundle.js.map" />
